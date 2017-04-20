@@ -1,0 +1,47 @@
+<!--
+
+Load this document into a div to turn that div into a numberArticlesBar (to define how many articles to use for word cloud).
+
+A numberArticlesBar responds to the 'clear' event.
+
+A numberArticlesBar will provide the 'yesSelection' and 'noSelection' events.
+
+-->
+
+<input type="text" id="numberArticlesTextField" />
+
+<style>
+	.ui-helper-hidden-accessible {
+		display: none;
+	}
+	
+
+	#numberArticlesTextField {
+		width: 100%;
+		padding: 1em;
+		
+		border: 2px #D00BE6 solid;
+	}
+
+	
+	/* Here put styles that only apply to the numberArticlesBar */
+</style>
+
+<script>
+	
+	var numberBar = $("#numberArticlesTextField").parent();
+	
+	
+	.on('input propertychange paste', function() {
+		numberBar.trigger("noSelection"); // no number selected
+	})
+	.autocomplete( "instance" )._renderItem = function( ul, item ) {
+	  
+
+	
+	numberBar.on('clear', function() {
+		$("#numberArticleshTextField").val("");
+		searchBar.trigger("noSelection");
+	})
+	
+</script>
