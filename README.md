@@ -5,6 +5,6 @@ Arman Akhbari
 
 Brian Bares
 
-Shokoufeh Namazian
+Shokoufeh Namazian.
 
 Matthew van Niekerk
