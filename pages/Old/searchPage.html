@@ -1,0 +1,48 @@
+<div id="ieeeSearchPage">
+	   
+    <h1>IEEE Cloud</h1>
+	<div id="ieeeSearchBar"></div>
+
+	<input type="button" id="search" class="button" value="Search" disabled="true"  />
+
+ 
+</div>
+
+<style>
+
+#ieeeSearchPage {
+	text-align: center;
+	margin: auto;
+	
+	vertical-align: middle;
+	display: table-cell;
+	padding-bottom: 20%;
+}
+
+#ieeeSearchBar {
+	width: 33%;
+	padding: 1em;
+}
+
+</style>
+
+<script>
+
+	$("#ieeeSearchBar")
+		.load("components/ieeeSearchBar.html")
+		.on("yesSelection", function() {		
+			$("#search").removeProp("disabled");
+		})
+		.on("noSelection", function() {
+			$("#search").attr("disabled", true);
+		});
+
+	$("#search").click(function() {
+		
+		var artistID = $("#ieeeSearchBar").attr("value");
+		artists = [allArtists[artistID]]
+	
+		loadPage("wordCloud");
+	});
+
+</script>
