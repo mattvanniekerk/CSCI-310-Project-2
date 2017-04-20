@@ -3,7 +3,10 @@
     <h1>IEEE Cloud</h1>
 	<div id="ieeeSearchBar"></div>
 
-	<input type="button" id="search" class="button" value="Search" disabled="true"  />
+	<input type="button" id="search" class="button" value="Search by keyword" disabled="true"  />
+	<input type="button" id="authorSearch" class="button" value="Search by author" disabled="true" />
+	
+	<div id="numberArticlesBar"></div>
 
  
 </div>
@@ -23,6 +26,13 @@
 	width: 33%;
 	padding: 1em;
 }
+
+#numberArticlesBar {
+    width: 16%;
+    padding: 1em;
+}
+    
+
 
 </style>
 
@@ -44,5 +54,10 @@
 	
 		loadPage("wordCloud");
 	});
+    
+    $("numberArticlesBar")
+        .load("components/numberArticlesBar.html");
+    
+    
 
 </script>
