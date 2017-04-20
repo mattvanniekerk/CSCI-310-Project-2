@@ -6,8 +6,8 @@
 	<input type="button" id="search" class="button" value="Search by keyword" disabled="true"  />
 	<input type="button" id="authorSearch" class="button" value="Search by author" disabled="true" />
 	
-	<div id="numberArticlesBar"></div>
-
+	
+	<input id="numArticlesField" type="number">
  
 </div>
 
@@ -40,11 +40,24 @@
 
 	$("#ieeeSearchBar")
 		.load("components/ieeeSearchBar.html")
-		.on("yesSelection", function() {		
-			$("#search").removeProp("disabled");
+		.on("yesSelection", function() {
+            var empty = false;
+            if($("#numArticlesField").val()=="") {
+                empty = true;
+            }
+            if (empty) {
+                $("#search").attr("disabled", true);
+                $("#authorSearch").attr("disabled", true);
+            } else {
+                $("#search").removeProp("disabled");
+                $("#authorSearch").removeProp("disabled");
+            }
+			//$("#search").removeProp("disabled");
 		})
 		.on("noSelection", function() {
 			$("#search").attr("disabled", true);
+            $("#authorSearch").attr("disabled", true);
+            $(this).attr("value", "")
 		});
 
 	$("#search").click(function() {
@@ -55,9 +68,55 @@
 		loadPage("wordCloud");
 	});
     
-    $("numberArticlesBar")
-        .load("components/numberArticlesBar.html");
+    $("#numArticlesField")
+		.on("change", function() {
+            var empty = true;
+            if($("#ieeeSearchBar").attr("value")) {
+                empty = false;
+            }
+            if (empty) {
+                $("#search").attr("disabled", true);
+                $("#authorSearch").attr("disabled", true);
+            } else {
+                if ($("#numArticlesField").val() != "") {
+                    $("#search").removeProp("disabled");
+                    $("#authorSearch").removeProp("disabled");
+                }
+                else {
+                    $("#search").attr("disabled", true);
+                    $("#authorSearch").attr("disabled", true);
+                }
+            }
+			//$("#search").removeProp("disabled");
+		})
+		.on("noSelection", function() {
+			$("#search").attr("disabled", true);
+            $("#authorSearch").attr("disabled", true);
+		});
     
+   // $("#numArticlesField")
+    /*
+    (function() {
+        $("form > input").keyup(function() {
+            var empty = false;
+            $("form > input").each(function() {
+                if ($(this).val() == '') {
+                    empty = true;
+                }
+            });
+            if (empty) {
+                $("#search").attr("disabled", true);
+            } else {
+                $("#search").removeProp('disabled');
+            }
+        });
+    })()
+    */
+        //$("#search").removeProp("disabled");
+   // })
+        //.on("noSelection", function() {
+          //  $("#search").attr("disabled", true);
+    //});
     
 
 </script>
