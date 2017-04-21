@@ -10,9 +10,9 @@ Arman Akhbari
 3) 
 
 Brian Bares
-1) Worked on start page and word cloud page. Added text field to input number of articles they want to use. dded author search button to initial page and made both buttons correctly enable and disable depending on if user has input both search terms and the number of articles they would like to use. 
-2) 
-3) 
+1) Worked on start page and word cloud page. Added text field to input number of articles they want to use. Added author search button to initial page and made both buttons correctly enable and disable depending on if user has input both search terms and the number of articles they would like to use. Also added download button to word cloud page. All buttons currently nonfunctional but I'm hoping to fix that once we figure out how to search through the articles we have downloaded locally.
+2) Continue working on the two pages and start planning how I'm going to modify the search functionality to search and make a word cloud of articles rather than song lyrics
+3) THESE DEADLINES THO
 
 Shokoufeh Namazian
 1)I just started working on black box for all requirement.
