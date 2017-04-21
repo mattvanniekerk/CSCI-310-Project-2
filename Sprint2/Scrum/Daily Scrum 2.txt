@@ -1,0 +1,26 @@
+QUESTIONS
+1) What did I do yesterday that helped the Development Team meet the Sprint Goal?
+2) What will I do today to help the Development Team meet the Sprint Goal?
+3) Do I see any impediment that prevents me or the Development Team from meeting the Sprint Goal?
+
+ANSWERS
+Arman Akhbari
+1) I wrote the product backlog for the documentation and adjusted all the information appropriately. I also did some research on the API's
+we can use.
+2) I will write the sprint backlog and review the parts that my team members have written.
+3) I have difficulty understanding the code.
+
+Brian Bares
+1) Skimmed through the code, continued learning how to adapt it for project 2.
+2) Will need to start actually editing the code and get a feel for it.
+3) Spent most of my time the past day working on lab for another class, as we're beginning the final lab project. Will need to balance time better
+
+Shokoufeh Namazian
+1) I started working on black white test.
+2) I try to do some behalf on black boxes and work on test.
+3) Since the group did not Implement API and  priority2 , I could not do gerkhin.
+
+Matthew van Niekerk
+1) I worked on the Codecademy tutorial and created a new burndown chart.
+2) I will update the burndown chart and continue the tutorial.
+3) I’m worried that we will not be able to learn the appropriate expertise quickly enough to still have time to complete the implementation. 

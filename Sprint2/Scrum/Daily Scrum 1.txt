@@ -1,0 +1,25 @@
+QUESTIONS
+1) What did I do yesterday that helped the Development Team meet the Sprint Goal?
+2) What will I do today to help the Development Team meet the Sprint Goal?
+3) Do I see any impediment that prevents me or the Development Team from meeting the Sprint Goal?
+
+ANSWERS
+Arman Akhbari
+1) I determined what features should be implemented during the second sprint.
+2) I researched on how to change the API of the search bar so we can search a researcher's last names instead of an artist.
+3) Not having any previous knowledge in PHP is preventing me from understanding the previous code therefore I require more time to figure it out.
+
+Brian Bares
+1) Began learning html and everything else needed for front-end changes (Mozilla Developer Network)
+2) Continue through the tutorial, look through the code from project 1 to see what I can feasibly adapt for project 2. Will look toward specific features once sprint backlog is finalized
+3) Frankly I don't want to do any back-end so I'll need to work with whoever does that to work on integrating the two together as we had an issue with that with project 1.
+
+Shokoufeh Namazian
+1) I just started on report sprint 2
+2) I am making backlog Today
+3) I am going to work on pair programming with one of the member to make index.html and working on priority 1. 
+
+Matthew van Niekerk
+1) I worked on a Codecademy tutorial on PHP.
+2) Today I will continue to work through the tutorial, so that I can implement appropriate adaptations in the back-end.
+3) I’m worried that we will not be able to learn the appropriate expertise quickly enough to still have time to complete the implementation. 
