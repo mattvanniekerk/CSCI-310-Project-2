@@ -20,6 +20,6 @@ Shokoufeh Namazian
 3)Since I don`t have the project1 codes and the code have doesn’t not have any chance to run black box , so I should find out how to fix it.
 
 Matthew van Niekerk
-1) 
-2) 
-3) 
+1) Worked on the Paper class and started downloading IEEE documents
+2) Finish the Paper class and downloading IEEE documents, then store the documents in a database as Paper objects
+3) Not really sure where to put the Paper class and everything it needs to have in it. Also not yet sure exactly how to store the Paper objects or what format to use.
