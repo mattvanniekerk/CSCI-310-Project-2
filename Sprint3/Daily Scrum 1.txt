@@ -5,9 +5,9 @@ QUESTIONS
 
 ANSWERS
 Arman Akhbari
-1) 
-2) 
-3) 
+1) I started learning JAVASCRIPT/HTML/CSS
+2) I implemented the table for the paperListPage and now trying to learn how to make functionalities with Javascript
+3) Lack of time and knowledge in Javascript really slowing me down
 
 Brian Bares
 1) Worked on start page and word cloud page. Added text field to input number of articles they want to use. Added author search button to initial page and made both buttons correctly enable and disable depending on if user has input both search terms and the number of articles they would like to use. Also added download button to word cloud page. All buttons currently nonfunctional but I'm hoping to fix that once we figure out how to search through the articles we have downloaded locally.
