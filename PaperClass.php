@@ -12,6 +12,8 @@
 		private $conference;
 		private $abstract;
 		private $content;
+		private $link;
+		private $bibtex;
 
 		public function getTitle(){
 			return $this->title;
@@ -46,11 +48,27 @@
 		}
 
 		public function getContent(){
-			return $this->authors;
+			return $this->content;
 		}
 
-		public function setContent($authors){
-			$this->authors = $authors;
+		public function setContent($content){
+			$this->content = $content;
+		}
+
+		public function getLink(){
+			return $this->link;
+		}
+
+		public function setLink($link){
+			$this->link = $link;
+		}
+
+		public function getBibtex(){
+			return $this->bibtex;
+		}
+
+		public function setBibtex($bibtex){
+			$this->bibtex = $bibtex;
 		}
 	}
 
