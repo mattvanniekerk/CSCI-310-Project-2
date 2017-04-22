@@ -196,22 +196,24 @@
         
         var data = 
             <?php
-                $papers = [
-                    "paper1" => [
-                        "title" => $paper1->getTitle(),
-                        "content" => $paper1->getContent()
-                    ],
-                    "paper2" => [
-                        "title" => $paper2->getTitle(),
-                        "content" => $paper2->getContent()
-                    ]
-                ];
-                echo json_encode($papers);
+                $papers = [$paper1, $paper2, $paper3, $paper4, $paper5];
+                $jsonArray = [];
+                foreach ($papers as $paper) {
+                    $jsonArray[$paper->getTitle()] =
+                    [
+                        "title" => $paper->getTitle(),
+                        "conference" => $paper->getConference(),
+                        "abstract" => $paper->getAbstract(),
+                        "content" => $paper->getContent()
+                    ];
+                }
+                echo json_encode($jsonArray);
             ?>;
         for (var key in data) {
             var paper = data[key];
-            //document.write(paper["title"] + "<br>" + paper["content"]);
-            //document.write("<br>");
+            document.write(paper["title"] + "<br>" + paper["conference"] + "<br>" +
+                           paper["abstract"] + "<br>" + paper["content"]);
+            document.write("<br>");
         }
         
         
