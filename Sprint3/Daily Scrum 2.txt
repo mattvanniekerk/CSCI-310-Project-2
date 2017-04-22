@@ -5,9 +5,9 @@ QUESTIONS
 
 ANSWERS
 Arman Akhbari
-1) 
-2) 
-3) 
+1) I worked on proogramming.
+2) Met with David and he showe us how to get started and now im continuing on what he talked about.
+3) Very limited time, but we are putting as much effort and time as we can.
 
 Brian Bares
 1) 
@@ -15,9 +15,9 @@ Brian Bares
 3) 
 
 Shokoufeh Namazian
-1) I worked and black box and document.
-2) I am still working on refactoring and UML digram. 
-3) A lot of class digram and xp practicing has been left because of lack of knowledge.
+1) 
+2) 
+3) 
 
 Matthew van Niekerk
 1) 
