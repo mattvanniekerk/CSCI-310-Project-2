@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
 	<title></title>
@@ -8,16 +7,30 @@
 	
 		require_once('/var/www/html/project/class.paper.php');
 
+		$num_papers = 10;
+
 		$papers = [];
 		$file;
 
 
 
-		for ($i = 0; $i < 10; $i++) {
-			$file = file_get_contents("database/papers/paper".($i+1).".txt");
+		for ($i = 0; $i < $num_papers; $i++) {
+			$file = file_get_contents("cache/papers/paper".($i+1).".txt");
 			$sections = explode("(/section)", $file);
 			
-			$papers[$i] = new Paper();
+			$papers += ["paper".($i+1) => [
+				"title" => $sections[0],
+				"authors" => explode(", ", $sections[1]),
+				"conference" => $sections[2],
+				"abstract" => $sections[3],
+				"content" => $sections[4],
+				"link" => $sections[5],
+				"bibtex" => $sections[6]
+				]];
+
+
+			/*
+			$papers[$i] =  new Paper();
 			$papers[$i]->setTitle($sections[0]);
 			$papers[$i]->setAuthors(explode(", ", $sections[1]));
 			$papers[$i]->setConference($sections[2]);
@@ -25,6 +38,7 @@
 			$papers[$i]->setContent($sections[4]);
 			$papers[$i]->setLink($sections[5]);
 			$papers[$i]->setBibtex($sections[6]);
+			*/
 			/*
 			echo $papers[$i]->getTitle();
 			for ($j; $j <= count($papers[$i]->getAuthors()); $j++) {
@@ -38,7 +52,7 @@
 			*/
 		}
 		
-		$p = [
+		/*$p = [
 			"paper1" => [
 				"title" => $papers[0]->getTitle(),
 				"authors" => $papers[0]->getAuthors(),
@@ -58,12 +72,9 @@
 				"bibtex" => $papers[1]->getBibtex()
 			]
 		];
+		*/
 
-		for ($i = 0; $i < 10; $i++) {
-			array_push($p, $papers[$i]);
-		}
-
-		file_put_contents('cache/papers.json', json_encode($p));
+		file_put_contents('cache/papers.json', json_encode($papers));
 		/*
 		$cache = fopen('papers.json', 'w');
 		fwrite($cache, json_encode($papers));
