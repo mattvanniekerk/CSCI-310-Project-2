@@ -1,0 +1,7 @@
+(title)(/title)
+(authors)(/authors)
+(conference)(/conference)
+(abstract)(/abstract)
+(content)(/content)
+(link)(/link)
+(bibtex)(/bibtex)
