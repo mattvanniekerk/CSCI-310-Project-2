@@ -15,9 +15,9 @@ Brian Bares
 3) 
 
 Shokoufeh Namazian
-1) 
-2) 
-3) 
+1) I worked and black box and document.
+2) I am still working on refactoring and UML digram. 
+3) A lot of class digram and xp practicing has been left because of lack of knowledge.
 
 Matthew van Niekerk
 1) 
