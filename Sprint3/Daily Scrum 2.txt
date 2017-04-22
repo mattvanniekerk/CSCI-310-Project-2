@@ -10,9 +10,9 @@ Arman Akhbari
 3) Very limited time, but we are putting as much effort and time as we can.
 
 Brian Bares
-1) 
-2) 
-3) 
+1) Went to office hours to figure out which features I'm supposed to work on and how to implement them
+2) Figure out how to generate a word cloud based on our dummy database of articles and how to navigate between them
+3) A lot of all this php and stuff is still magic to me
 
 Shokoufeh Namazian
 1) 
