@@ -62,10 +62,10 @@
         <link rel="stylesheet" type="text/css" href="styles.css">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="scripts/helper.js"></script>
-        <script src="scripts/postImageToFacebook.js"></script>
+        <script src="../scripts/helper.js"></script>
+        <script src="../scripts/postImageToFacebook.js"></script>
         <script src="https://d3js.org/d3.v4.min.js"></script>
-        <script src="scripts/d3.layout.cloud.js"></script>
+        <script src="../scripts/d3.layout.cloud.js"></script>
         <script type="text/javascript" src="http://canvg.github.io/canvg/rgbcolor.js"></script> 
         <script type="text/javascript" src="http://canvg.github.io/canvg/StackBlur.js"></script>
         <script type="text/javascript" src="http://canvg.github.io/canvg/canvg.js"></script> 
@@ -259,14 +259,19 @@
 			var minSize = 14;
 			
 			var currentMax = words[0].size;
+            //document.write(words[0].size);
 			var currentMin = words[words.length-1].size;
             
-            for (var key in words) {
+          /*  for (var key in words) {
                 document.write(words[key].text + " " + words[key].size + " ");
                 words[key].size = (word.size - currentMin) / (currentMax - currentMin) * (maxSize - minSize) + minSize;
-                //document.write(words[key].size + "<br>");
+                document.write(words[key].size + "<br>");
                 //why does this input NaN?
-            }
+            }*/
+            $.each(words, function(key, word) {
+				// scale the sizes between maxSize and minSize;
+				words[key].size = (word.size - currentMin) / (currentMax - currentMin) * (maxSize - minSize) + minSize;
+			});
 
 			
 			// these colors will be chosen from randomly
@@ -314,7 +319,7 @@
         }
         generatePaperCloud();
         
-		function generateLyricsCloud() {
+		/*function generateLyricsCloud() {
 					
 			// count words
 			var words = {};
@@ -394,10 +399,10 @@
 					$("#share").removeProp("disabled");
 			  })
 			  .start();
-		}
+		}*/
 		
 		// call this function when the page first loads, then whenever the artist list changes
-		function setTitle() {
+	/*	function setTitle() {
 			// Set the title (of document and header)
 			var title = ""
 			$.each(artists, function(index, artist) {
@@ -408,9 +413,9 @@
 			document.title = title;
 			$("#wordCloudTitle").text(title);
 		}
-		
+		*/
 		// Call this function when the page first loads and then whenever an artist is searched/added
-		function queryArtists(artistsToQuery) {
+		/*function queryArtists(artistsToQuery) {
 		
 			setTitle();
 			
@@ -418,14 +423,14 @@
 			$("#wordCloudSVG").html("");
 			$("#wordCloudLoading").show(0);
 			$("#share").attr("disabled", true);
-
+*/
 			// Make the parameter object
 					
-			var ids = [];
+			/*var ids = [];
 			$.each(artistsToQuery, function(key, value) {
 				ids.push(value.chartLyricsID);
-			})
-				
+			})*/
+			/*	
 			// Load the lyrics and generate the word cloud
 			$.ajax({ // Load artist lyrics
 				url: "ajax/artistSongs.php",
@@ -440,11 +445,11 @@
 					
 					generateLyricsCloud()
 				}
-			});
-		}
+			});*/
+		
 		
 		// Call this function when the page first loads and then whenever an artist searched
-		function searchArtists(a) {
+		/*function searchArtists(a) {
 			
 			artists = a;
 			songs = [];
@@ -463,14 +468,14 @@
 			artists.push(a);
 			
 			queryArtists([a]);
-		}
+		}*/
 		
 		//
 		// Post the image to Facebook!
 		//
 		// @param authToken: the FB authToken to use
 		//
-		function shareWordCloud(authToken) {
+		/*function shareWordCloud(authToken) {
 			
 			var c = document.getElementById('lyricsCloudCanvas').toDataURL('image/png');
 			var encodedPng = c.substring(c.indexOf(',')+1,c.length);
@@ -481,22 +486,22 @@
 			postImageToFacebook(authToken, 'lyricsCloud.png', 'image/png', caption, imageData);
 			
 			FB.logout(); // log the app out of Facebook
-		}
+		}*/
 		
 		///
 		//ON LOAD:
 		///
 		
 		// Initialize the lyrics cloud
-		if (songs.length > 0) { // we're coming back to this page
+		/*if (songs.length > 0) { // we're coming back to this page
 			setTitle();
 			generateLyricsCloud();
 		} else { // first time to this page
 			searchArtists(artists);
-		}
+		}*/
 		
 		// Set up the Artist Search Bar
-		$("#paperSearchBar")
+		/*$("#paperSearchBar")
 			.load("components/paperSearchBar.html")
 			.on("yesSelection", function() {		
 				$("#search").removeProp("disabled");
@@ -505,7 +510,7 @@
 			.on("noSelection", function() {
 				$("#search").attr("disabled", true);
 				$("#add").attr("disabled", true);
-			});
+			});*/
 
 		// Set up the Search Button
 		$('#search').click(function() {
