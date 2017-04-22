@@ -187,7 +187,7 @@
 				return false;
 			}
 
-			
+
 			return word;
 		}
 		
@@ -209,13 +209,110 @@
                 }
                 echo json_encode($jsonArray);
             ?>;
-        for (var key in data) {
+      /*  for (var key in data) {
             var paper = data[key];
             document.write(paper["title"] + "<br>" + paper["conference"] + "<br>" +
                            paper["abstract"] + "<br>" + paper["content"]);
             document.write("<br>");
-        }
+        }*/
         
+        function generatePaperCloud() {
+            var words = {};
+            for (var key in data) { //for each paper
+                var paper = data[key];
+                var paperWords = paper["content"].split(" ");
+                for (var word in paperWords) {
+                    check = validateWord(paperWords[word]);
+                    if (check) { //if word is valid i.e. greater than 3 letters and not common
+                        //document.write(check + "<br>");
+                        //document.write(paperWords[word] + "<br>");
+                        words[paperWords[word]] = words[paperWords[word]] ? words[paperWords[word]] + 1 : 1;
+                        //words["justice"] = words["justice"] ? words["justice"] +1 : 1;
+                        //if justice is in words, increment, otherwise add it.
+                        //key=>value is "justice"=>5, for instance
+                    }
+                }
+            }
+            
+           // document.write("<br>"+words["happy"]+"<br>");
+            words = Object.keys(words).map(function(word) {
+				return {text: word, size: words[word]};
+			});
+            //an array of keys ["justice", "happy", "dream"]
+            //perform map on it, which performs a function on each element
+            //for each element, return an object with two elements, text and size
+            //this new array is assigned to words
+            //so words is now an object with a bunch of pairs in it, {text: "justice", size: 3}
+
+				
+			// sort words
+			words = words.sort(function(a, b) {
+				return b.size - a.size;
+			});
+            
+			
+			// only want 250 most frequent words
+
+			words = words.slice(0, 250);
+			
+			var maxSize = 60;
+			var minSize = 14;
+			
+			var currentMax = words[0].size;
+			var currentMin = words[words.length-1].size;
+            
+            for (var key in words) {
+                document.write(words[key].text + " " + words[key].size + " ");
+                words[key].size = (word.size - currentMin) / (currentMax - currentMin) * (maxSize - minSize) + minSize;
+                //document.write(words[key].size + "<br>");
+                //why does this input NaN?
+            }
+
+			
+			// these colors will be chosen from randomly
+			var colors = ["red", "blue", "green", "orange", "purple"];
+			
+		    d3.layout.cloud().size([1200, 500])
+			  .words(words)
+			  .padding(5) //padding between words
+			  .rotate(function() { return 0; }) //no word rotation
+			  .spiral("rectangular") //rectangular shape
+			  .fontSize(function(d) { return d.size; }) //font size
+			  .on("end", function (words) { //when the cloud is layed out:
+			  
+					// draw in the svg tag
+					  d3.select("#wordCloudSVG")
+						.attr("width", 1200)
+						.attr("height", 500)
+					  .append("g")
+						.attr("transform", "translate(600,250)")
+					  .selectAll("text")
+						.data(words)
+					  .enter().append("text")
+						.style("font-size", function(d) { return d.size + "px"; })
+						.style("font-family", "serif")
+						.style("fill", function(d, i) { return colors[Math.floor(Math.random() * colors.length)]; })
+						.attr("text-anchor", "middle")
+						.attr("transform", function(d) {
+						  return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+						})
+						.text(function(d) { return d.text; })
+						.on("click", function(d, i) {
+							word = d.text;
+							loadPage("paperList");
+						});
+
+					$("#wordCloudLoading").hide(0);
+					$("#wordCloudSVG").show(0);
+			
+					// draw in the canvas tag
+					canvg('lyricsCloudCanvas', $("#wordCloudSVG").html());
+			
+					$("#share").removeProp("disabled");
+			  })
+			  .start();
+        }
+        generatePaperCloud();
         
 		function generateLyricsCloud() {
 					
