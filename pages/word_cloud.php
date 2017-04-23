@@ -173,8 +173,10 @@
             failure: function () { },
             complete: function (data) {
                 if (data.readyState == '4' && data.status == '200') {
-                    //alert("true");
-                    alert(data);
+                    //results = data;
+                    //alert(results);
+                    //alert(data.responseText);
+                    
                 }
                 else {
                     alert("false");
