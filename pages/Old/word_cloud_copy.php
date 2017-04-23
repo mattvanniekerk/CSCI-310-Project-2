@@ -214,6 +214,27 @@
             document.write(paper["title"] + "<br>" + paper["conference"] + "<br>" +
                            paper["abstract"] + "<br>" + paper["content"]);
             document.write("<br>");
+            
+            
+            
+            var data = 
+            <?php
+                $papers = [$paper1, $paper2, $paper3, $paper4, $paper5];
+                $jsonArray = [];
+                foreach ($papers as $paper) {
+                    $jsonArray[$paper->getTitle()] =
+                    [
+                        "title" => $paper->getTitle(),
+                        //"authors" => $paper->getAuthors();
+                        "conference" => $paper->getConference(),
+                        "abstract" => $paper->getAbstract(),
+                        //"link" => $paper->getLink();
+                        //"bibtex" => $paper->getBibtex();
+                        "content" => $paper->getContent()
+                    ];
+                }
+                echo json_encode($jsonArray);
+            ?>;
         }*/
         
         function generatePaperCloud() {

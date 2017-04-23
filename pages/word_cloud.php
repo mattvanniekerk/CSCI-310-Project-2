@@ -176,27 +176,26 @@
         });
         
         for (var key in json) {
-            console.log(json[key].title);
+            console.log(json[key].authors[0]);
         }
 
-
-        
-       /* for (var key in ) { //for each paper
-                var paper = data[key];
-                var paperWords = paper["content"].split(" ");
-                for (var word in paperWords) {
-                    check = validateWord(paperWords[word]);
-                    if (check) { //if word is valid i.e. greater than 3 letters and not common
-                        //document.write(check + "<br>");
-                        //document.write(paperWords[word] + "<br>");
-                        words[paperWords[word]] = words[paperWords[word]] ? words[paperWords[word]] + 1 : 1;
-                        //words["justice"] = words["justice"] ? words["justice"] +1 : 1;
-                        //if justice is in words, increment, otherwise add it.
-                        //key=>value is "justice"=>5, for instance
+        var allWords = [];
+        if ("<?= $t ?>" == "Search by author") {
+            //var allWords = "";
+            for (var key in json) {
+                if (allWords.length < "<?= $n ?>") {
+                    for (i = 0; i < json[key].authors.length; i++) {
+                        if (json[key].authors[i] == "<?= $q ?>") {
+                            console.log("laskdjf");
+                            allWords.push(json[key].content);
+                        }
                     }
                 }
-            }*/
+            }
+            
+        }
         
+      
 
             //xhr.open("GET", "http://ieeexplore.ieee.org/gateway/ipsSearch.jsp?querytext=<?= q ?>&hc=<?= n ?>", true);
         
@@ -245,34 +244,19 @@
 		
 		// Generate a lyrics cloud from the 'songs' variable.
 		// Update the SVG and Canvas
-        
-        var data = 
-            <?php
-                $papers = [$paper1, $paper2, $paper3, $paper4, $paper5];
-                $jsonArray = [];
-                foreach ($papers as $paper) {
-                    $jsonArray[$paper->getTitle()] =
-                    [
-                        "title" => $paper->getTitle(),
-                        //"authors" => $paper->getAuthors();
-                        "conference" => $paper->getConference(),
-                        "abstract" => $paper->getAbstract(),
-                        //"link" => $paper->getLink();
-                        //"bibtex" => $paper->getBibtex();
-                        "content" => $paper->getContent()
-                    ];
-                }
-                echo json_encode($jsonArray);
-            ?>;
 
         
         function generatePaperCloud() {
             var words = {};
-            for (var key in data) { //for each paper
-                var paper = data[key];
-                var paperWords = paper["content"].split(" ");
-                for (var word in paperWords) {
-                    check = validateWord(paperWords[word]);
+            var paperWords = [];
+            for (i = 0; i < allWords.length; i++) {
+                var temp = allWords[i].split(" ");
+                for (j = 0; j < temp.length; j++) {
+                    paperWords.push(temp[j]);
+                }
+            }
+            for (var word in paperWords) {
+                check = validateWord(paperWords[word]);
                     if (check) { //if word is valid i.e. greater than 3 letters and not common
                         //document.write(check + "<br>");
                         //document.write(paperWords[word] + "<br>");
@@ -281,7 +265,6 @@
                         //if justice is in words, increment, otherwise add it.
                         //key=>value is "justice"=>5, for instance
                     }
-                }
             }
             
            // document.write("<br>"+words["happy"]+"<br>");
