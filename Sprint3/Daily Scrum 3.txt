@@ -20,6 +20,6 @@ Shokoufeh Namazian
 3) 
 
 Matthew van Niekerk
-1) 
-2) 
-3) 
+1) I finished creating the json file of papers.
+2) Work with Brian to request data from IEEE Xplore and use it to create the word cloud.
+3) Since we're inexperienced, we aren't sure what the easiest and fastest route to our goal is. I finished the json file, but now we're probably not gonna use it at all anyway. If we make more mistakes like this, we'll waste time.
