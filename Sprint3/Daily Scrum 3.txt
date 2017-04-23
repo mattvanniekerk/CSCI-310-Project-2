@@ -5,9 +5,9 @@ QUESTIONS
 
 ANSWERS
 Arman Akhbari
-1) 
-2) 
-3) 
+1) my table for paperlistPage is done and i can download the table as pdf and text
+2) working on reading JSON file
+3) Do not know how to read JSON or XML files.
 
 Brian Bares
 1) Got word cloud working.
