@@ -20,6 +20,6 @@ I worked and black box and document.
 3) A lot of class digram and xp practicing has been left because of lack of knowledge
 
 Matthew van Niekerk
-1) 
-2) 
-3) 
+1) Went to office hours to get help from David. He gave us a better understanding of web development and helped us find a direction to go in.
+2) I will finish downloading papers and finish the script to parse them and store them in a json file.
+3) We finally have a clear direction to move in, but it's a little late now, so we'll have to work fast. 
