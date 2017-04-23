@@ -281,7 +281,9 @@
 						.text(function(d) { return d.text; })
 						.on("click", function(d, i) {
 							word = d.text;
-							loadPage("paperList");
+                            window.open("paper_list.php?word="+word, "_self", false);
+							//loadPage("paperList");
+                            
 						});
 
 					$("#wordCloudLoading").hide(0);
