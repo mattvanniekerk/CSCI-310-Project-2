@@ -79,7 +79,7 @@
         <script type="text/javascript" src="http://canvg.github.io/canvg/rgbcolor.js"></script> 
         <script type="text/javascript" src="http://canvg.github.io/canvg/StackBlur.js"></script>
         <script type="text/javascript" src="http://canvg.github.io/canvg/canvg.js"></script> 
-        
+        <script src="../cache/papers.json"> </script>
 
 
     </head>
@@ -159,30 +159,44 @@
 
 
 	<script>
-        var xhr = new XMLHttpRequest();
-        //xhr.open("GET", "http://ieeexplore.ieee.org/gateway/ipsSearch.jsp?au=<?= q ?>&hc=<?= n ?>", true);
-        //xhr.send();
-        $.ajax({
-            url: "http://ieeexplore.ieee.org/gateway/ipsSearch.jsp?au=<?= q ?>&hc=<?= n ?>",
-            dataType: "jsonp",
-            type: 'GET',
+        
+       /* $.getJSON("../cache/papers.json", function(json) {
+            console.log(json);
+        });*/
+        
+        var json = {};
+        $.ajax({ 
+            url: "../cache/papers.json",
             async: false,
-            crossDomain: true,
-            headers: { "Access-Control-Allow-Origin": "*"},
-            success: function () { },
-            failure: function () { },
-            complete: function (data) {
-                if (data.readyState == '4' && data.status == '200') {
-                    //results = data;
-                    //alert(results);
-                    //alert(data.responseText);
-                    
-                }
-                else {
-                    alert("false");
-                }
+            dataType: "json",
+            success:function(data) {
+                json = data;
+                console.log(data);
             }
         });
+        
+        for (var key in json) {
+            console.log(json[key].title);
+        }
+
+
+        
+       /* for (var key in ) { //for each paper
+                var paper = data[key];
+                var paperWords = paper["content"].split(" ");
+                for (var word in paperWords) {
+                    check = validateWord(paperWords[word]);
+                    if (check) { //if word is valid i.e. greater than 3 letters and not common
+                        //document.write(check + "<br>");
+                        //document.write(paperWords[word] + "<br>");
+                        words[paperWords[word]] = words[paperWords[word]] ? words[paperWords[word]] + 1 : 1;
+                        //words["justice"] = words["justice"] ? words["justice"] +1 : 1;
+                        //if justice is in words, increment, otherwise add it.
+                        //key=>value is "justice"=>5, for instance
+                    }
+                }
+            }*/
+        
 
             //xhr.open("GET", "http://ieeexplore.ieee.org/gateway/ipsSearch.jsp?querytext=<?= q ?>&hc=<?= n ?>", true);
         
