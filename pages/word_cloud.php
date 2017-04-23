@@ -160,8 +160,27 @@
 
 	<script>
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "http://ieeexplore.ieee.org/gateway/ipsSearch.jsp?au=<?= q ?>&hc=<?= n ?>", true);
-        xhr.send();
+        //xhr.open("GET", "http://ieeexplore.ieee.org/gateway/ipsSearch.jsp?au=<?= q ?>&hc=<?= n ?>", true);
+        //xhr.send();
+        $.ajax({
+            url: "http://ieeexplore.ieee.org/gateway/ipsSearch.jsp?au=<?= q ?>&hc=<?= n ?>",
+            dataType: "jsonp",
+            type: 'GET',
+            async: false,
+            crossDomain: true,
+            headers: { "Access-Control-Allow-Origin": "*"},
+            success: function () { },
+            failure: function () { },
+            complete: function (data) {
+                if (data.readyState == '4' && data.status == '200') {
+                    //alert("true");
+                    alert(data);
+                }
+                else {
+                    alert("false");
+                }
+            }
+        });
 
             //xhr.open("GET", "http://ieeexplore.ieee.org/gateway/ipsSearch.jsp?querytext=<?= q ?>&hc=<?= n ?>", true);
         
