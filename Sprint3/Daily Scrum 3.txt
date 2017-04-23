@@ -15,9 +15,9 @@ Brian Bares
 3) I've never worked with xml before and json is also making me trip balls
 
 Shokoufeh Namazian
-1) 
-2) 
-3) 
+1)working on document and xp practices. 
+2) Find proxy pattern and work on classes.
+3) Still a lot of work left to do. 
 
 Matthew van Niekerk
 1) I finished creating the json file of papers.
