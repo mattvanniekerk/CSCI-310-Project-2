@@ -10,9 +10,9 @@ Arman Akhbari
 3) 
 
 Brian Bares
-1) 
-2) 
-3) 
+1) Got word cloud working.
+2) Will work on searching for papers using the IEEE API as well as figuring out how to feed the info into the word cloud generator
+3) I need to use the bathroom
 
 Shokoufeh Namazian
 1) 
