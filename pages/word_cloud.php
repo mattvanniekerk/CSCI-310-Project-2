@@ -58,6 +58,10 @@
 
 
 	$q = $_GET["query"];
+    $t = $_GET["search_type"];
+    $n = $_GET["num_articles"];
+
+
 
 
 ?>
@@ -75,9 +79,8 @@
         <script type="text/javascript" src="http://canvg.github.io/canvg/rgbcolor.js"></script> 
         <script type="text/javascript" src="http://canvg.github.io/canvg/StackBlur.js"></script>
         <script type="text/javascript" src="http://canvg.github.io/canvg/canvg.js"></script> 
-        <script>
-			window.papers = <?= json_encode($papers) ?>
-		</script>
+        
+
 
     </head>
     <body>
@@ -156,7 +159,20 @@
 
 
 	<script>
-			
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "http://ieeexplore.ieee.org/gateway/ipsSearch.jsp?au=<?= q ?>&hc=<?= n ?>", true);
+        xhr.send();
+
+            //xhr.open("GET", "http://ieeexplore.ieee.org/gateway/ipsSearch.jsp?querytext=<?= q ?>&hc=<?= n ?>", true);
+        
+        /*xhr.onload = function() {
+            if (xhr.readystate == xhr.DONE) {
+                if (xhr.status == 200 && xhr.readyState == 4) {
+                    console.log(xhr.response);
+                    console.log(xhr.responseXML);
+                }
+            }
+        }*/
 		///
 		//FUNCTIONS:
 		///		
