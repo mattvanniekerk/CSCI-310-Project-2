@@ -27,8 +27,8 @@
                         <input type="text" name="query" id="ieeeSearchTextField" />   
                     </div>
 
-                	<input type="submit" id="search" name="search_type" class="button" value="Search by keyword" />
-                	<input type="submit" id="authorSearch" name="search_type" class="button" value="Search by author" />
+                	<input type="submit" id="search" name="search_type" class="button" value="Search by keyword"/>
+                	<input type="submit" id="authorSearch" name="search_type" class="button" value="Search by author"/>
                 	
                 	<div id="articlesInput">
                 	<h6>How many articles would you like to include?</h6>
@@ -44,86 +44,39 @@
 </html>
 
 <script>
+    $(function () {
+        $("#query, #numArticlesField").bind("change keyup",
+        function () {      
+            if ($("#query").val() != "" && $("#numArticlesField").val() != "") {
+                $("$search").removeAttr("disabled");
+                $("$authorSearch").removeAttr("disabled");
+            } else {
+                $("search").attr("disabled", true);
+                $("authorSearch").attr("disabled", true);
+            }
+        });
+    });
 
-	// $("#ieeeSearchBar")
-	// 	.load("components/ieeeSearchBar.html")
-	// 	.on("yesSelection", function() {
- //            var empty = false;
- //            if($("#numArticlesField").val()=="") {
- //                empty = true;
- //            }
- //            if (empty) {
- //                $("#search").attr("disabled", true);
- //                $("#authorSearch").attr("disabled", true);
- //            } else {
- //                $("#search").removeProp("disabled");
- //                $("#authorSearch").removeProp("disabled");
- //            }
-	// 		//$("#search").removeProp("disabled");
-	// 	})
-	// 	.on("noSelection", function() {
-	// 		$("#search").attr("disabled", true);
- //            $("#authorSearch").attr("disabled", true);
- //            $(this).attr("value", "")
-	// 	});
-
-	// $("#search").click(function() {
-		
-	// 	var artistID = $("#ieeeSearchBar").attr("value");
-	// 	artists = [allArtists[artistID]]
-	
-	// 	loadPage("wordCloud");
-	// });
     
- //    $("#numArticlesField")
-	// 	.on("change", function() {
- //            var empty = true;
- //            if($("#ieeeSearchBar").attr("value")) {
- //                empty = false;
- //            }
- //            if (empty) {
- //                $("#search").attr("disabled", true);
- //                $("#authorSearch").attr("disabled", true);
- //            } else {
- //                if ($("#numArticlesField").val() != "") {
- //                    $("#search").removeProp("disabled");
- //                    $("#authorSearch").removeProp("disabled");
- //                }
- //                else {
- //                    $("#search").attr("disabled", true);
- //                    $("#authorSearch").attr("disabled", true);
- //                }
- //            }
-	// 		//$("#search").removeProp("disabled");
-	// 	})
-	// 	.on("noSelection", function() {
-	// 		$("#search").attr("disabled", true);
- //            $("#authorSearch").attr("disabled", true);
-	// 	});
     
-   // $("#numArticlesField")
-    /*
-    (function() {
+    
+	/*(function() {
         $("form > input").keyup(function() {
             var empty = false;
             $("form > input").each(function() {
-                if ($(this).val() == '') {
+                if ($(this).val() == "") {
                     empty = true;
                 }
             });
             if (empty) {
-                $("#search").attr("disabled", true);
-            } else {
-                $("#search").removeProp('disabled');
+                $("#search").attr("disabled", "disabled");
+                $("#authorSearch").attr("disabled", "disabled");
+            } else{
+                $("#search").removeProp("disabled");
+                $("#authorSearch").removeProp("disabled");
             }
         });
-    })()
-    */
-        //$("#search").removeProp("disabled");
-   // })
-        //.on("noSelection", function() {
-          //  $("#search").attr("disabled", true);
-    //});
+    })()*/
     
 
 </script>
