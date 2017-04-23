@@ -1,0 +1,141 @@
+Quasi-Lumped Crystal-Like Reactive Elements(/section)Pavlo Bidenko, Evgeniy Nelin, Anatolii Nazarko, Volodymyr Popsui(/section)2015 13th International Conference The Experience of Designing and Application of CAD Systems in Microelectronics (CADSM)(/section)Quasi-lumped reactive elements on the base of electromagnetic-crystal inhomogeneities with a substantial increase of parameters compared to conventional microstrip structures are proposed. The parameter’s error of quasi-lumped element is analyzed and the procedure of its minimization is offered. Theoretical and experimental results are presented.(/section)I. INTRODUCTION
+In the microstrip technique there were new directions for devices parameters improvement [1]. One of these directions is metamaterials which include crystal-like structures with zone properties similar to crystals. Microstrip crystal-like structures named electromagnetic crystals, as well as separate electromagnetic-crystal inhomogeneities (ECIs), are used in microstrip devices.
+Conventional ECIs are two-dimensional structures formed as holes or slits of different shapes in the metallized surface or in the signal conductor [1-3].
+In [4-5] high- and low-impedance three-dimensional (3D) ECIs were proposed. ECI includes inhomogeneities in metallized surface, in dielectric and in signal surface with much smaller and much larger values of equivalent impedance (Z l and Z h , respectively; indexes «l» and «h» denoting low and high impedance).
+Substantial expansion of impedance range is a key advantage of 3D ECIs. Wave impedance characterizes reaction of a structure on wave perturbation and, in the same, efficiency of structure influence on a wave. With increasing Zh/Zl ratio structure selectivity increases.
+In the paper the application of 3D ECIs as quasi-lumped reactive elements with a substantially increase of reactive parameters compared to conventional microstrip structures is proposed and procedure of quasi-lumped parameter’s error minimization is offered.
+II. CONVENTIONAL QUASI-LUMPED ELEMENTS
+Conventional microstrip quasi-lumped reactive elements are formed by wide and narrow signal conductor sections with length l < λ / 8 ( λ ― wavelength) and impedances Zl and Z h , respectively [1]. These sections are modeled by T- and π-equivalent circuits with elements defined by equations, respectively [1]:
+X = iZtg φ , B = iZ−1sin ; X = φiZ sin , B =φiZ−1tg φ , (1) 22
+where X and B are series and shunt elements of equivalent circuits, φ = βl , β is the wavenumber.
+For l<λ/8 weobtain φ<π/4,andEqs.(1)become: φ−1 −1φ
+X ≈ iZ 2 , B ≈ iZ φ ; X ≈ iZφ , B ≈ iZ 2 . (2)
+  Under conditions
+Zl << Z0 and Zh >> Z0 ,
+(3)
+where Z0 is a source impedance, series inductances and shunt capacitances in the T- and π-equivalent circuits, respectively, is not taken into account. As a result, it remains only shunt capacitance and series inductance with values defined as:
+C≈ l ,L≈Zhl, (4) Zlv v
+where v is a wave’s speed.
+Eqs. (4) follow also from the expression for input
+impedance of transmission line (TL) section:
+z = 1+izg 1+izφ≈, (5)
+  in 1+ iz−1g 1+ iz−1φ
+where small «z» denoting normalized to Z impedances
+  0
+which are used for mathematical letups simplification;
+g=tg .φ
+For conditions (3) Eq. (5) yields
+yin ≈1+iz−1φ, zin ≈1+izφ, (6) where y is input admittance. Second summands in
+in
+Eqs. (6) correspond to B and X in T- and π-equivalent circuits in Eqs. (2).
+Expansion of the impedance range increases the rigour of conditions (3) as well as the achievable values of capacitance and inductance according to Eqs. (4).
+III. DETAILS OF MODELING
+As ECIs are 3D structures with complex geometry and boundary conditions it is necessary to use 3D electromagnetic simulators. In the paper simulation was held in software package СST Microwave Studio. This package can be considered as a «virtual» vector network analyzer with possibility of structure's fields’ visualization.
+For minimum transmission coefficient T0 and its frequency f0 found in Microwave Studio TL section model is created. The parameters of the model are defined by expressions:
+ 1 1−T2 T 2 zl,h= 0 ,zl≈0,zh≈
+ c 2 ,εeff=   ,(7)
+   T0 2 T0
+ 4 f0l  where εeff is the effective dielectric constant, c is the speed of
+light in a vacuum.
+The expressions for zl,h and εeff are found from the formula
+for TL section transmission coefficient and from relationship βl = π / 4 for the frequency f0, respectively.
+  CADSM 2015, 24-27 February, 2015, Polyana-Svalyava (Zakarpattya), UKRAINE
+ As shown in the next section, characteristics obtained by means of these two models are in a good agreement which suggests the possibility of the TL model using for the analysis of complex 3D ECI.
+TL models were created in the software package The MathWorks MATLAB. One of the main advantages of this package is easy and intuitive working with matrices and arrays. In the paper there was the need to work with large dimensions matrices and cyclic operations. Syntax of this package simplifies writing of cycles and sometimes allows replacing a cycle by an operator. This package was used also for experimental results treatment and minimizing parameter’s error of quasi-lumped element.
+IV. CRYSTAL-LIKE QUASI-LUMPED ELEMENTS
+Fig. 1 shows low-impedance (a-c) and high-impedance ECI d. ECI a is formed by the blind metallized hole from metallized surface side and signal conductor placed above it. Due increasing its area ECI b has a higher efficiency. ECI c is formed as the blind metallized hole from signal conductor side.
+ab
+cd
+Fig. 1 ECIs
+Figs. 2-3 show characteristics for low-impedance ECI
+compared to conventional structure. ECIs parameters: signal conductor width w = 1.1 mm (with Z0 = 50 Ω), hole diameter d = 8 mm, gap between hole and signal conductor for ECIs a and b as well as the thickness of the dielectric under ECI c 0.28 mm. Conventional structure is fulfilled in the form of a square with the side equals diameter d. Substrate material ― Rogers RO3010, thickness of dielectric 1.28 mm, relative dielectric constant 10.2, dielectric loss tangent 0.0023 at the frequency 10 GHz, metallization thickness 0.035 mm.
+Fig. 2 shows the transmission coefficient characteristics of ECI c (curve 1) and conventional structure (curve 2). Values of f0 and T0 are 3.21 and 3.25 GHz, –16.24 and –5.48 dB, respectively. Vertical line limits frequency range by the frequency f0/2 from the condition l = λ/ 8 . Characteristics 1 and 2 are calculated using 3D-simulation. Curves 3 and 4 are the transmission coefficients characteristics of lumped capacitances with parameters according to Eq. (4). Characteristic 5 corresponds to the TL model.
+In the frequency range up to f0/2 the characteristics 1 and 2 are close to the characteristics 3 and 4. The effectiveness of ECI characterized by the value of T0 is much higher compared to conventional structure.
+According to Eqs. (7) and [1] the equivalent values of Zl and εeff of ECI and conventional structure are equal 3.9 and
+14.4 Ω, 8.5 and 8.3, respectively. According to Eq. (4) the values of capacitance are equal 20.0 and 5.2 pF.
+10
+CADSM 2015, 24-27 February, 2015, Polyana-Svalyava (Zakarpattya), UKRAINE
+0
+-4 2 5 -8 4 1
+С, pF T, dB
+-12 -16
+3
+0.1.2
+12 8 4
+2
+4 1
+0,5
+1,5
+f/f0
+Fig. 2 Transmission coefficient characteristics
+Fig. 3 shows the capacitance dependences of ECIs a, b and
+c (curves 1, 2 and 3, respectively), as well as of conventional
+structure (curve 4). 20
+16 3
+0345678 d, mm
+Fig. 3 Сapacitance dependences
+Equivalent capacitance of ECI c is slightly larger than
+capacitance of ECI b. The capacitance of ECI а with d=8mm and w=1.1mm is equal 3.8 pF. In conventional solution such capacitance corresponds to w = 5.4 mm.
+High-impedance ECI d is formed by through hole in metallized surface and dielectric with a small-diameter conductor above it.
+Let us compare ECI d and conventional structure as quasi- lumped inductances. ECI parameters: d = 8 mm, diameter of the mounted wire 0.1 mm. Conventional structure is a signal conductor section with length l = d and w = 0.1 mm. Substrate material  Rogers RO3010.
+According to the 3D-simulation the values of f0 and T0 for ECI and conventional structure are 7.91 and 3.78GHz, –9.25 and –1.95 dB, respectively. According to Eqs. (4) and (7) and [1] for ECI and conventional structure the following values of Zl, εeff and L are obtained: 281.2 and 100.2 Ω, 1.4 and 6.1, 8.9 and 6.6 nH.
+From the experimental transmission coefficient characteristics measured by Rodhe&Schwarz ® FSH Handheld Spectrum Analyzer the following values of Zl and L are calculated: 286.9 and 103.1 Ω, 9.1 and 6.8 nH.
+Fig. 4 shows the dependences of equivalent impedance for ECI (curve 1) and inductance for ECI (curve 2) and for
+ conventional structure (curve 3).
+Conventional structure impedance does not depend on
+length. ECI impedance increases with diameter increasing. As a result steepness of dependence 2 more as compared to
+Eqs. (4). This multiplier will be also in subtrahend denominators in Eqs. (9). The condition (10) is met by an optimal value k o .
+Fig. 5 shows the dependences of |δ|m without (curve 1) and with (curve 2) error minimization, as well as the dependence of ko (curve 3) for the frequency range 0...f0/2. Minimization notedly reduces error of reactive parameters realization by quasi-lumped elements.
+dependence 3. 300
+250
+200
+150
+100
+503 4 5 6 7 82
+d, mm
+Fig. 4 Impedance and inductance dependences
+Because of value εeff decreasing increase of inductance value by ECI compared to a capacitance less, however frequency range increases substantially. The simultaneous estimation of inductance and frequency range increase is given by product P = Lf0/2. According to Eqs. (4) and (7) we have P=Zh/8. The increase of P for ECI with d=3 and 8 mm is 1.5 and 2.8, respectively.
+V. ERROR MINIMIZATION
+Let us analyse the error of reactive parameter realization by quasi-lumped element (ECI or conventional) and consider the possibility of its minimization.
+Input admittance and impedance of lumped capacitance and inductance is determined by Eqs (6) with the sign of «=». According to Eq. (5) the input admittance and impedance of quasi-lumped elements are determined by expressions
+y′ =1+g2+i(z−1−z)g,z′ =1+g2+i(z−z−1)g.(8) in 1+ z2g2 in 1+ z−2g2
+Real parts in Eqs. (6) and (8) are equal only at zero frequency. In contrast of Eqs. (6) real parts in Eqs. (8) increase with frequency.
+According to Eqs. (6) and (8) relative errors of reactive parameters realization by quasi-lumped elements with error sign account are determined by expressions
+(z−1 − z)g (z − z−1)g δC=1−−12,δL=1−−12,(9) (z +zg )φ (z+z g )φ
+where indexes «C» and «L» correspond to the capacitance and inductance. When zC = zL-1 we have δC = δL = δ.
+Except for one value of z C = z L -1 in frequency range
+0...f0/2 we have δ+ ≠ δ− , where δ± are maximum positive
+and minimum negative values of δ.
+For maximum error |δ|m minimizing it is necessary to
+10 18
+25 20 15 10
+5
+0 2 4 6 8 zh
+0.5 0.25 0.167 0.125 z Fig. 5 Dependences of δ m and kо
+VI. CONCLUSION
+2 3
+6 4
+3
+1
+2
+1,1 1.0
+11
+.
+|δ|m, %
+ko
+Z, Ω
+L, nH
+fulfill condition
+To that aim we will enter a multiplier k in the right side of
+δ=δ=δ . (10) −+m
+CADSM 2015, 24-27 February, 2015, Polyana-Svalyava (Zakarpattya), UKRAINE
+ECIs allow quasi-lumped reactive elements realization with a substantially greater parameter values compared to conventional microstrip structures with the same size. For required parameter values such increase corresponds to sizes reduction.
+Optimization of the relationship between reactivity parameter value and equivalent impedance of quasi-lumped element allows to minimize quasi-lumped element realization error.(/section)http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7230781(/section)@INPROCEEDINGS{7230781, 
+author={P. Bidenko and E. Nelin and A. Nazarko and V. Popsui}, 
+booktitle={The Experience of Designing and Application of CAD Systems in Microelectronics}, 
+title={Quasi-lumped crystal-like reactive elements}, 
+year={2015}, 
+pages={9-11}, 
+keywords={crystal structure;inhomogeneous media;electromagnetic-crystal inhomogeneity;parameter error;quasilumped crystal-like reactive elements;Capacitance;Conductors;Impedance;Inductance;Mathematical model;Microstrip;Minimization;electromagnetic crystal;electromagnetic inhomogeneity;quasi-lumped reactive element}, 
+doi={10.1109/CADSM.2015.7230781}, 
+month={Feb},}
