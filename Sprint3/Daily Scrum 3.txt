@@ -12,12 +12,12 @@ Arman Akhbari
 Brian Bares
 1) Got word cloud working.
 2) Will work on searching for papers using the IEEE API as well as figuring out how to feed the info into the word cloud generator
-3) I need to use the bathroom
+3) I've never worked with xml before and json is also making me trip balls
 
 Shokoufeh Namazian
-1)working on document and xp practices. 
-2) Find proxy pattern and work on classes.
-3) Still a lot of work left to do. 
+1) 
+2) 
+3) 
 
 Matthew van Niekerk
 1) 
