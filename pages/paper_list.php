@@ -4,6 +4,9 @@
     // Write your script up here
     // save important data to variables 
 include '../PaperClass.php';
+    $q = $_GET["query"];
+    $a = $_GET["au"];
+    
 
 
 $papers = [];
@@ -244,6 +247,7 @@ function  RunProgram(){
 function FillDataUp(){
     
 }
+    
 
 </script>
 
