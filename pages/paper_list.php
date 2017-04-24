@@ -21,6 +21,7 @@ $frequencies = [];
 
 }
 
+    $q = $_GET["query"];
 
 ?>
 

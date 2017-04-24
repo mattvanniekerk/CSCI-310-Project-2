@@ -11,9 +11,9 @@
         <script type="text/javascript" src="http://canvg.github.io/canvg/rgbcolor.js"></script> 
         <script type="text/javascript" src="http://canvg.github.io/canvg/StackBlur.js"></script>
         <script type="text/javascript" src="http://canvg.github.io/canvg/canvg.js"></script> 
-        <script>
-                    
-        </script>
+        
+        
+        
     </head>
     <body>
         <div id="page">
@@ -21,7 +21,7 @@
             <div id="ieeeSearchPage">
             	<h1>IEEE Cloud</h1>
 
-                <form action="/project/pages/word_cloud.php" method="GET">
+                <form id="userInput" action="/project/pages/word_cloud.php" method="GET">
             
                 	<div id="ieeeSearchBar">
                         <input type="text" name="query" id="ieeeSearchTextField" />   
@@ -44,17 +44,15 @@
 </html>
 
 <script>
-    $(function () {
-        $("#query, #numArticlesField").bind("change keyup",
-        function () {      
-            if ($("#query").val() != "" && $("#numArticlesField").val() != "") {
-                $("$search").removeAttr("disabled");
-                $("$authorSearch").removeAttr("disabled");
-            } else {
-                $("search").attr("disabled", true);
-                $("authorSearch").attr("disabled", true);
+    $("#userInput").validate({
+        rules: {
+            ieeeSearchTextField: {
+                required: true
+            },
+            numArticlesField: {
+            required: true
             }
-        });
+        }
     });
 
     
