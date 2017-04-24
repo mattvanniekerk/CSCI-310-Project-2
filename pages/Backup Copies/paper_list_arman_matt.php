@@ -1,7 +1,5 @@
 <?php 
-    $q = $_GET["query"];
-    $au = $_GET["au"];
-    $n = $_GET["num"];
+    $q = $_GET["query"]; 
 ?>
 
 <!DOCTYPE html>
@@ -103,7 +101,18 @@
 
     }
 
-        
+
+
+    var td = new Array();
+    var arrayOfArrays = new Array();
+    var tr = new Array();
+    var tempPapers = new Array();
+    var tempfrequencies = new Array();
+
+    var papers = new Array();
+    var frequencies = new Array();
+    var query = "<?= $q ?>";
+
     var json = {};
     $.ajax({ 
         url: "../cache/papers.json",
@@ -114,69 +123,51 @@
             console.log(data);
         }
     });
-
-
-var papersUsed = new Array();
-var frequencies = new Array();
-    
-var td = new Array();
-var arrayOfArrays = new Array();
-var tr = new Array();
-        
-
-        
-        
-        
-if ("<?= $au ?>" != "") { //if an author search
-    //var allWords = "";
-    var counter = 0;
+    var i = 0;
     for (var key in json) {
-        if (papersUsed.length < "<?= $n ?>") {
-            for (k = 0; k < json[key].authors.length; k++) {
-                if (json[key].authors[k].toLowerCase() == "<?= $au ?>".toLowerCase()) {
-                    //see if word shows up in this particular paper; if so, proceed as normal
-                    var paperContent = json[key].content.split(" ");
-                    for (j = 0; j < paperContent.length; j++) {
-                        if (paperContent[j].toLowerCase() == "<?= $q ?>".toLowerCase()) {
-                            frequencies[counter] = frequencies[counter] ? frequencies[counter] + 1 : 1;
-                        }
-                    }
-                    if (frequencies[counter] > 0) {
-                        papersUsed[counter] = new Paper();
-                        papersUsed[counter].setTitle(json[key].title);
-                        papersUsed[counter].setAuthors(json[key].authors);
-                        papersUsed[counter].setConference(json[key].conference);
-                        papersUsed[counter].setLink(json[key].link);
-                        papersUsed[counter].setBibtex(json[key].bibtex);
-                        papersUsed[counter].setContent(json[key].content);
-                        papersUsed[counter].setAbstract(json[key].abstract);
-                        papersUsed[counter].setKeywords(json[key].keywords);
-                        //determineFrequency("", counter);
-                        counter++;
-                    }
-                }
-            }
-        }
+        papers[i] = new Paper();
+        papers[i].setTitle(json[key].title);
+        papers[i].setAuthors(json[key].authors);
+        papers[i].setConference(json[key].conference);
+        papers[i].setLink(json[key].link);
+        papers[i].setBibtex(json[key].bibtex);
+        papers[i].setAbstract(json[key].abstract);
+        papers[i].setContent(json[key].content);
+        papers[i].setKeywords(json[key].keywords);
+        i++;
     }
-}
+
+    
+
+    var sortedArray = new Array();
+
+    var myTable = document.getElementById("paperListTable");
+
+    var re = new RegExp(query, 'gi');
+
+    for (i=0; i < papers.length; i++) {
+        frequencies[i] = 0;
+        frequencies[i] = (papers[i].getContent().match(re) || []).length;
+    }
 
 
-    var sortedArray = new Array()
-
-   var myTable = document.getElementById("paperListTable");
-         for (i = 0; i < papersUsed.length; i++) {
-            //var tr = document.createElement('TR');
+    for (i=0; i < papers.length; i++) {
+        //var tr = document.createElement('TR');
+        if (frequencies[i] > 0) {
             td.push(frequencies[i]);
-            td.push(papersUsed[i].getTitle());
-            td.push(papersUsed[i].getAuthors());
-            td.push(papersUsed[i].getConference());
-            td.push(papersUsed[i].getLink());
-            td.push(papersUsed[i].getBibtex());
+            td.push(papers[i].getTitle());
+            td.push(papers[i].getAuthors());
+            td.push(papers[i].getConference());
+            td.push(papers[i].getLink());
+            td.push(papers[i].getBibtex());
             arrayOfArrays.push(td);
             td = [];
-            }
-            var max  = 0;
-            counter = 0;
+        }
+    }
+            
+    var max  = 0;
+    var counter = 0;
+
     while(arrayOfArrays.length > 0){//while we have elements in the US array
         max = 0;
         for(j = 0; j<arrayOfArrays.length; j++){//find the element with the greatest frequency
@@ -188,19 +179,17 @@ if ("<?= $au ?>" != "") { //if an author search
         arrayOfArrays.splice(max,1);
         counter++;
 
+    }     
+
+    for(z= 0; z < sortedArray.length; z++){
+         var tr = document.createElement('TR');
+        for(p = 0; p<sortedArray[z].length; p++){
+        tdd = document.createElement('TD');
+        tdd.appendChild(document.createTextNode(sortedArray[z][p]));
+        tr.appendChild(tdd);
+        }
+        myTable.appendChild(tr);
     }
-         
-
-            for(z= 0; z < sortedArray.length; z++){
-                 var tr = document.createElement('TR');
-                for(p = 0; p<sortedArray[z].length; p++){
-                tdd = document.createElement('TD');
-                tdd.appendChild(document.createTextNode(sortedArray[z][p]));
-                tr.appendChild(tdd);
-                }
-                myTable.appendChild(tr);
-            }
-
 
                
           
@@ -229,6 +218,7 @@ if ("<?= $au ?>" != "") { //if an author search
 
 
 
+</script>
 
 <script>
 

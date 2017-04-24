@@ -282,7 +282,7 @@
 						.on("click", function(d, i) {
 							word = d.text;
                             if ("<?= $t ?>" == "Search by author") { //this leaves a space in the author name! Fix later
-                                window.open("paper_list.php?query="+word+"&au=<?= $q ?>", "_self", false);
+                                window.open("paper_list.php?query="+word+"&au=<?= $q ?>&num=<?= $n ?>", "_self", false);
                             } else {
                                 window.open("paper_list.php?query="+word, "_self", false);
                             }

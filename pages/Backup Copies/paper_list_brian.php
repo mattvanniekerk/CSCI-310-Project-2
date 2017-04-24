@@ -1,9 +1,8 @@
-<?php 
+<?php
     $q = $_GET["query"];
     $au = $_GET["au"];
     $n = $_GET["num"];
 ?>
-
 <!DOCTYPE html>
 <html>
 
@@ -14,14 +13,8 @@
     <title>CSCI310</title>
   
     <h1 id="myHeader">  Hi  </h1>
-    <script type = "text/javascript" src="../tableExport.jquery.plugin-master/jquery.js"></script>
-    <script type = "text/javascript" src="../js/jspdf.js"></script>
-    <script type = "text/javascript" src="../js/jquery-2.1.3.js"></script>
-    <script type = "text/javascript" src="../js/pdfFromHTML.js"></script>
-    <script type = "text/javascript" src="../tableExport.jquery.plugin-master/jquery.base64.js"></script>
-    <script type = "text/javascript" src="../tableExport.jquery.plugin-master/tableExport.js"></script>
-    <script type = "text/javascript" src="../tableExport.jquery.plugin-master/html2canvas.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+  
  
 </head>
 
@@ -41,70 +34,69 @@
     </tr>
     <script>
 
-    function Paper(){
-        this.title = "";
-        this.authors = [];
-        this.conference = "";
-        this.link = "";
-        this.abstract = "";
-        this.content = "";
-        this.bibtex = "";
-        this.keywords = [];
+function Paper(){
+    this.title = "";
+    this.authors = [];
+    this.conference = "";
+    this.link = "";
+    this.abstract = "";
+    this.content = "";
+    this.bibtex = "";
+    this.keywords = [];
 
-        this.getKeywords = function getKeywords(){
-            return this.keywords;
-        }
-        this.setKeywords = function setKeywords(arg){
-            keywords = arg;
-        }
-
-        this.getTitle = function getTitle(){
-            return this.title;
-        }
-        this.setTitle = function setTitle(arg){
-            this.title = arg;
-        }
-        this.getAuthors = function getAuthors(){
-            return this.authors;
-        }
-        this.setAuthors = function setAuthors(arg){
-             this.authors = arg;
-        }
-        this.getConference = function getConference(){
-            return this.conference;
-        }
-        this.setConference = function setConference(arg){
-            this.conference = arg;
-        }
-        this.getContent = function getContent(){
-            return this.content;
-        }
-        this.setContent = function setContent(arg){
-             this.content = arg;
-        }
-        this.getAbstract = function getAbstract(){
-            return this.abstract;
-        }
-        this.setAbstract = function setAbstract(arg){
-            this.abstract;
-        }
-        this.setLink = function setLink(arg){
-            this.link = arg;
-        }
-        this.getLink = function getLink(){
-            return this.link;
-        }
-        this.setBibtex = function setBibtex(arg){
-            this.bibtex = arg;
-        }
-        this.getBibtex = function getBibtex(){
-            return this.bibtex;
-        }
-
+    this.getKeywords = function getKeywords(){
+        return this.keywords;
+    }
+    this.setKeywords = function setKeywords(arg){
+        keywords = arg;
     }
 
-        
-    var json = {};
+    this.getTitle = function getTitle(){
+        return this.title;
+    }
+    this.setTitle = function setTitle(arg){
+        this.title = arg;
+    }
+    this.getAuthors = function getAuthors(){
+        return this.authors;
+    }
+    this.setAuthors = function setAuthors(arg){
+         this.authors = arg;
+    }
+    this.getConference = function getConference(){
+        return this.conference;
+    }
+    this.setConference = function setConference(arg){
+        this.conference = arg;
+    }
+    this.getContent = function getContent(){
+        return this.content;
+    }
+    this.setContent = function setContent(arg){
+         this.content = arg;
+    }
+    this.getAbstract = function getAbstract(){
+        return this.abstract;
+    }
+    this.setAbstract = function setAbstract(arg){
+        this.abstract;
+    }
+    this.setLink = function setLink(arg){
+        this.link = arg;
+    }
+    this.getLink = function getLink(){
+        return this.link;
+    }
+    this.setBibtex = function setBibtex(arg){
+        this.bibtex = arg;
+    }
+    this.getBibtex = function getBibtex(){
+        return this.bibtex;
+    }
+
+}
+
+var json = {};
     $.ajax({ 
         url: "../cache/papers.json",
         async: false,
@@ -149,8 +141,6 @@ if ("<?= $au ?>" != "") { //if an author search
                         papersUsed[counter].setLink(json[key].link);
                         papersUsed[counter].setBibtex(json[key].bibtex);
                         papersUsed[counter].setContent(json[key].content);
-                        papersUsed[counter].setAbstract(json[key].abstract);
-                        papersUsed[counter].setKeywords(json[key].keywords);
                         //determineFrequency("", counter);
                         counter++;
                     }
@@ -159,6 +149,8 @@ if ("<?= $au ?>" != "") { //if an author search
         }
     }
 }
+
+
 
 
     var sortedArray = new Array()
@@ -176,7 +168,7 @@ if ("<?= $au ?>" != "") { //if an author search
             td = [];
             }
             var max  = 0;
-            counter = 0;
+            var counter = 0;
     while(arrayOfArrays.length > 0){//while we have elements in the US array
         max = 0;
         for(j = 0; j<arrayOfArrays.length; j++){//find the element with the greatest frequency
@@ -200,7 +192,6 @@ if ("<?= $au ?>" != "") { //if an author search
                 }
                 myTable.appendChild(tr);
             }
-
 
                
           
@@ -226,9 +217,16 @@ if ("<?= $au ?>" != "") { //if an author search
 
 
 </body>
+<script type = "text/javascript" src="../tableExport.jquery.plugin-master/jquery.js"></script>
+<script type = "text/javascript" src="../js/jspdf.js"></script>
+<script type = "text/javascript" src="../js/jquery-2.1.3.js"></script>
+<script type = "text/javascript" src="../js/pdfFromHTML.js"></script>
+<script type = "text/javascript" src="../tableExport.jquery.plugin-master/jquery.base64.js"></script>
+<script type = "text/javascript" src="../tableExport.jquery.plugin-master/tableExport.js"></script>
+<script type = "text/javascript" src="../tableExport.jquery.plugin-master/html2canvas.js"></script>
 
 
-
+</script>
 
 <script>
 
