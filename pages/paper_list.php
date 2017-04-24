@@ -6,10 +6,10 @@
 
 <head>
     <title>CSCI310</title>
-   
-    <h1 id="myHeader">  Hi  </h1>
-   
   
+    <h1 id="myHeader">  Hi  </h1>
+  
+ 
 </head>
 
 <body>
@@ -33,7 +33,7 @@ function Paper(){
     this.authors = [];
     this.conference = "";
     this.link = "";
-    this.abstract = ""; 
+    this.abstract = "";
     this.content = "";
     this.bibtex = "";
     this.keywords = [];
@@ -117,9 +117,9 @@ var tempfrequencies = new Array();
     var sortedArray = new Array()
 
    var myTable = document.getElementById("paperListTable");
-         for (i=0; i < 10; i++) { 
+         for (i=0; i < 10; i++) {
             //var tr = document.createElement('TR');
-            
+           
             td.push(Math.floor(Math.random() * 15) + 1 );
             td.push(tempPapers[i].getTitle());
             td.push(tempPapers[i].getAuthors());
@@ -143,7 +143,7 @@ var tempfrequencies = new Array();
         counter++;
 
     }
-          
+         
 
             for(z= 0; z < sortedArray.length; z++){
                  var tr = document.createElement('TR');
@@ -155,14 +155,14 @@ var tempfrequencies = new Array();
                 myTable.appendChild(tr);
             }
 
-                
-           
-             
+               
+          
+            
 
     </script>
 
     </table>
-   
+  
     </div>
 
     <!-- <div id="welcomeDiv"  style="display:none;" class="answer_list" > WELCOME</div>
@@ -192,7 +192,7 @@ var tempfrequencies = new Array();
 
 <script>
 
-/* <!-- 
+/* <!--
 document.write(Number.MAX_VALUE));
 --> */
 var searchedWord = "";
@@ -201,7 +201,7 @@ var pageFrequency = "";
 var pageContent = "";
 var pageAuthors = [];
 var pageBibtext = "";
-var pageLink = "";  
+var pageLink = ""; 
 
 
 
@@ -223,14 +223,14 @@ function HTMLtoTXT(){
             }
             uri = "data:application/octet-stream," + encodeURIComponent(totalCont);
 
-            location.href = uri; 
+            location.href = uri;
 
 // Build a data URI:
 
 
 // Click on the file to download
 // You can also do this as a button that has the href pointing to the data URI
-   
+  
 
     //downloadInnerHtml(fileName, 'HTMLtoPDF','text/html');
 
@@ -242,7 +242,7 @@ function  RunProgram(){
     document.getElementById('myHeader').innerHTML = "HELLO";
 }
 function FillDataUp(){
-    
+   
 }
 
 </script>
@@ -251,7 +251,7 @@ function FillDataUp(){
 </html>
 
 <!--         <?php for ($i=1; $i <= 10; $i++) { ?>
-            <tr> 
+            <tr>
                 <td> <?php echo $frequencies[$i]?> </td>
                 <td> <?php echo $papers[$i]->getTitle();?> </td>
                 <td> <?php echo $papers[$i]->getAuthors(); ?> </td>
@@ -264,26 +264,26 @@ function FillDataUp(){
 
 <!-- // /*function HTMLtoTXT() {
 
-//         <?php 
+//         <?php
 //        $s = "hey" ;
-//        for ($i=1; $i <= 10; $i++) { 
+//        for ($i=1; $i <= 10; $i++) {
 //         /*$s = "hi";*/
-             
-//                $string .=   $frequencies[$i];
-//                $string .=  $papers[$i]->getTitle(); 
-//                $string .=  $papers[$i]->getAuthors();  
-//                $string .= $papers[$i]->getConference();
-//                $string .=  "https://www.youtube.com/" ; 
-//                $string .=$papers[$i]->getBibtex(); 
-
             
+//                $string .=   $frequencies[$i];
+//                $string .=  $papers[$i]->getTitle();
+//                $string .=  $papers[$i]->getAuthors(); 
+//                $string .= $papers[$i]->getConference();
+//                $string .=  "https://www.youtube.com/" ;
+//                $string .=$papers[$i]->getBibtex();
+
+           
 //          }
-//          header("Content-Disposition: attatchment; filename = temp.txt"); 
+//          header("Content-Disposition: attatchment; filename = temp.txt");
 //          header("Content-Type: text/plain");
-         
+        
 //          echo $s; ?>
 // //                  /*    $("paperListTable").tableExport({
 //         type:'txt',
 //         escape: 'false',
-//     }); 
+//     });
 //  */ -->

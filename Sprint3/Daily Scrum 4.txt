@@ -1,0 +1,25 @@
+QUESTIONS
+1) What did I do yesterday that helped the Development Team meet the Sprint Goal?
+2) What will I do today to help the Development Team meet the Sprint Goal?
+3) Do I see any impediment that prevents me or the Development Team from meeting the Sprint Goal?
+
+ANSWERS
+Arman Akhbari
+1)I managed to fill up the table on paperList.php with fake data and sort it by frequency
+2)I can download the table as TXT file now
+3)Now we need to see how to do testing and we have no idea.
+
+Brian Bares
+1)
+2)
+3)
+
+Shokoufeh Namazian
+1) I was woking on document and UML
+2) Still confuse about refactoring and working on it I just did the black box for requ2
+3) A lot of black box left and xp practices.
+
+Matthew van Niekerk
+1)
+2)
+3)
