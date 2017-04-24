@@ -1,7 +1,3 @@
-
-
-
-
 <!DOCTYPE html>
 <html>
 
@@ -144,7 +140,6 @@ var tempfrequencies = new Array();
         }
         sortedArray.push(arrayOfArrays[max]);
         arrayOfArrays.splice(max,1);
-        console.log(sortedArray[counter][0]);
         counter++;
 
     }
