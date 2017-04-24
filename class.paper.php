@@ -11,6 +11,7 @@
 		private $authors = [];
 		private $conference;
 		private $abstract;
+		private $keywords = [];
 		private $content;
 		private $link;
 		private $bibtex;
@@ -45,6 +46,14 @@
 
 		public function setAbstract($abstract){
 			$this->abstract = $abstract;
+		}
+
+		public function getKeywords(){
+			return $this->keywords;
+		}
+
+		public function setKeywords($keywords){
+			$this->keywords = $keywords;
 		}
 
 		public function getContent(){

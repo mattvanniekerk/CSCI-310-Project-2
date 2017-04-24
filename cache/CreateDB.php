@@ -21,9 +21,10 @@
 				"authors" => explode(", ", $sections[1]),
 				"conference" => $sections[2],
 				"abstract" => $sections[3],
-				"content" => $sections[4],
-				"link" => $sections[5],
-				"bibtex" => $sections[6]
+				"keywords" => explode(", ", $sections[4]),
+				"content" => $sections[5],
+				"link" => $sections[6],
+				"bibtex" => $sections[7]
 				]];
 		}
 
