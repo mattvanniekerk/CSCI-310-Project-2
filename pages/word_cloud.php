@@ -185,7 +185,7 @@
             for (var key in json) {
                 if (allWords.length < "<?= $n ?>") {
                     for (i = 0; i < json[key].authors.length; i++) {
-                        if (json[key].authors[i] == "<?= $q ?>") {
+                        if (json[key].authors[i].toLowerCase() == "<?= $q ?>".toLowerCase()) {
                             console.log("laskdjf");
                             allWords.push(json[key].content);
                         }

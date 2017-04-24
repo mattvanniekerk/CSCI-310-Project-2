@@ -116,6 +116,7 @@ function Paper(){
 
 
 var td = new Array();
+var arrayOfArrays = new Array();
 var tr = new Array();
 var tempPapers = new Array();
 var tempfrequencies = new Array();
@@ -133,9 +134,11 @@ var tempfrequencies = new Array();
 
 }
 
+    var sortedArray = new Array()
+
    var myTable = document.getElementById("paperListTable");
          for (i=0; i < 10; i++) { 
-            var tr = document.createElement('TR');
+            //var tr = document.createElement('TR');
             
             td.push(Math.floor(Math.random() * 15) + 1 );
             td.push(tempPapers[i].getTitle());
@@ -143,25 +146,39 @@ var tempfrequencies = new Array();
             td.push(tempPapers[i].getConference());
             td.push(tempPapers[i].getLink());
             td.push(tempPapers[i].getBibtex());
+            arrayOfArrays.push(td);
+            td = [];
+            }
+            var max  = 0;
+            var counter = 0;
+    while(arrayOfArrays.length > 0){//while we have elements in the US array
+        max = 0;
+        for(j = 0; j<arrayOfArrays.length; j++){//find the element with the greatest frequency
+            if(arrayOfArrays[j][0] > arrayOfArrays[max][0]){
+                max = j;
+            }
+        }
+        sortedArray.push(arrayOfArrays[max]);
+        arrayOfArrays.splice(max,1);
+        console.log(sortedArray[counter][0]);
+        counter++;
 
+    }
+          
 
-
-
-                for(p = 0; p<td.length; p++){
+            for(z= 0; z < sortedArray.length; z++){
+                 var tr = document.createElement('TR');
+                for(p = 0; p<sortedArray[z].length; p++){
                 tdd = document.createElement('TD');
-                tdd.appendChild(document.createTextNode(td[p]));
+                tdd.appendChild(document.createTextNode(sortedArray[z][p]));
                 tr.appendChild(tdd);
-
-                
+                }
+                myTable.appendChild(tr);
             }
 
                 
-            td = [];
-            myTable.appendChild(tr);
-            
-
-
-}
+           
+             
 
     </script>
 
@@ -176,7 +193,7 @@ var tempfrequencies = new Array();
     <button id = "downloadAsTXT" onClick="HTMLtoTXT()"> Download List (TXT)</button>
     <button id = "backToCloud"> Back to Cloud Page</button>
     <br>
-    <button id = "RunIt" onClick="RunProgram()"> Run Program</button>
+    <button id = "RunIt" onClick="sortTable()"> Run Program</button>
     <br>
     <button id = "fillUpData" onClick = "FillDataUp()"> Fill Up Data </button>
 
@@ -211,11 +228,13 @@ var pageLink = "";
 
 var fileName =  'tags.html';
 
-function HTMLtoTXT(){
-   
-    downloadInnerHtml(fileName, 'HTMLtoPDF','text/html');
 
-}
+function HTMLtoTXT(){
+
+    //downloadInnerHtml(fileName, 'HTMLtoPDF','text/html');
+
+    }
+
 
 
 function  RunProgram(){
