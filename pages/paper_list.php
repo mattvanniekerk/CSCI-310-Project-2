@@ -1,28 +1,4 @@
-<?php 
-    
 
-    // Write your script up here
-    // save important data to variables 
-include '../PaperClass.php';
-
-
-$papers = [];
-$frequencies = [];
-
-    for ($i = 0; $i <= 10; $i++) {
-        $frequencies [$i] = rand(5,20);
-        $papers[$i]= new Paper();
-        $papers[$i]->setTitle("paper".$i );
-        $papers [$i]->setAuthors("Author".$i );
-        $papers[$i]->setConference("Conference".$i );
-        $papers [$i]->setLink("Link".$i );
-        $papers [$i]->setBibtex("Bibtext".$i );
-
-
-}
-
-
-?>
 
 
 
@@ -50,7 +26,7 @@ $frequencies = [];
         <th id = "paperAuthor" style="padding:0 15px 0 15px;"> Author</th>
         <th id = "paperConference" style="padding:0 15px 0 15px;"> Conference</th>
         <th id = "paperDownloadLink" style="padding:0 15px 0 15px;"> Download Link</th>
-        <th id = "paperBibtext" style="padding:0 15px 0 15px;"> Bibtext</th>
+        <th id = "paperBibtex" style="padding:0 15px 0 15px;"> Bibtext</th>
 
 
     </tr>
@@ -64,6 +40,14 @@ function Paper(){
     this.abstract = ""; 
     this.content = "";
     this.bibtex = "";
+    this.keywords = [];
+
+    this.getKeywords = function getKeywords(){
+        return this.keywords;
+    }
+    this.setKeywords = function setKeywords(arg){
+        keywords = arg;
+    }
 
     this.getTitle = function getTitle(){
         return this.title;
@@ -230,6 +214,28 @@ var fileName =  'tags.html';
 
 
 function HTMLtoTXT(){
+    var totalCont = "Frequency"+'\t'+"Title"+'\t'+"Author"+'\t'+"Conference"+'\t'+"Download Link"+'\t'+"Bibtex"+'\n';
+    var cont = "";
+                for(z= 0; z < sortedArray.length; z++){
+                // var tr = document.createElement('TR');
+                    for(p = 0; p<sortedArray[z].length; p++){
+                        cont += sortedArray[z][p] ;
+                        cont += "\t";
+                    }
+                    cont += "\n";
+                    totalCont += cont;
+                    cont = "";
+            }
+            uri = "data:application/octet-stream," + encodeURIComponent(totalCont);
+
+            location.href = uri; 
+
+// Build a data URI:
+
+
+// Click on the file to download
+// You can also do this as a button that has the href pointing to the data URI
+   
 
     //downloadInnerHtml(fileName, 'HTMLtoPDF','text/html');
 
