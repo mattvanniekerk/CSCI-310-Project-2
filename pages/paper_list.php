@@ -1,3 +1,7 @@
+<?php 
+    $q = $_GET["query"]; 
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -8,7 +12,14 @@
     <title>CSCI310</title>
   
     <h1 id="myHeader">  Hi  </h1>
-  
+    <script type = "text/javascript" src="../tableExport.jquery.plugin-master/jquery.js"></script>
+    <script type = "text/javascript" src="../js/jspdf.js"></script>
+    <script type = "text/javascript" src="../js/jquery-2.1.3.js"></script>
+    <script type = "text/javascript" src="../js/pdfFromHTML.js"></script>
+    <script type = "text/javascript" src="../tableExport.jquery.plugin-master/jquery.base64.js"></script>
+    <script type = "text/javascript" src="../tableExport.jquery.plugin-master/tableExport.js"></script>
+    <script type = "text/javascript" src="../tableExport.jquery.plugin-master/html2canvas.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
  
 </head>
 
@@ -28,109 +39,135 @@
     </tr>
     <script>
 
-function Paper(){
-    this.title = "";
-    this.authors = [];
-    this.conference = "";
-    this.link = "";
-    this.abstract = "";
-    this.content = "";
-    this.bibtex = "";
-    this.keywords = [];
+    function Paper(){
+        this.title = "";
+        this.authors = [];
+        this.conference = "";
+        this.link = "";
+        this.abstract = "";
+        this.content = "";
+        this.bibtex = "";
+        this.keywords = [];
 
-    this.getKeywords = function getKeywords(){
-        return this.keywords;
-    }
-    this.setKeywords = function setKeywords(arg){
-        keywords = arg;
-    }
+        this.getKeywords = function getKeywords(){
+            return this.keywords;
+        }
+        this.setKeywords = function setKeywords(arg){
+            keywords = arg;
+        }
 
-    this.getTitle = function getTitle(){
-        return this.title;
-    }
-    this.setTitle = function setTitle(arg){
-        this.title = arg;
-    }
-    this.getAuthors = function getAuthors(){
-        return this.authors;
-    }
-    this.setAuthors = function setAuthors(arg){
-         this.authors = arg;
-    }
-    this.getConference = function getConference(){
-        return this.conference;
-    }
-    this.setConference = function setConference(arg){
-        this.conference = arg;
-    }
-    this.getContent = function getContent(){
-        return this.content;
-    }
-    this.setContent = function setContent(arg){
-         this.content = arg;
-    }
-    this.getAbstract = function getAbstract(){
-        return this.abstract;
-    }
-    this.setAbstract = function setAbstract(arg){
-        this.abstract;
-    }
-    this.setLink = function setLink(arg){
-        this.link = arg;
-    }
-    this.getLink = function getLink(){
-        return this.link;
-    }
-    this.setBibtex = function setBibtex(arg){
-        this.bibtex = arg;
-    }
-    this.getBibtex = function getBibtex(){
-        return this.bibtex;
-    }
+        this.getTitle = function getTitle(){
+            return this.title;
+        }
+        this.setTitle = function setTitle(arg){
+            this.title = arg;
+        }
+        this.getAuthors = function getAuthors(){
+            return this.authors;
+        }
+        this.setAuthors = function setAuthors(arg){
+             this.authors = arg;
+        }
+        this.getConference = function getConference(){
+            return this.conference;
+        }
+        this.setConference = function setConference(arg){
+            this.conference = arg;
+        }
+        this.getContent = function getContent(){
+            return this.content;
+        }
+        this.setContent = function setContent(arg){
+             this.content = arg;
+        }
+        this.getAbstract = function getAbstract(){
+            return this.abstract;
+        }
+        this.setAbstract = function setAbstract(arg){
+            this.abstract;
+        }
+        this.setLink = function setLink(arg){
+            this.link = arg;
+        }
+        this.getLink = function getLink(){
+            return this.link;
+        }
+        this.setBibtex = function setBibtex(arg){
+            this.bibtex = arg;
+        }
+        this.getBibtex = function getBibtex(){
+            return this.bibtex;
+        }
 
-}
-
-
+    }
 
 
 
+    var td = new Array();
+    var arrayOfArrays = new Array();
+    var tr = new Array();
+    var tempPapers = new Array();
+    var tempfrequencies = new Array();
 
-var td = new Array();
-var arrayOfArrays = new Array();
-var tr = new Array();
-var tempPapers = new Array();
-var tempfrequencies = new Array();
+    var papers = new Array();
+    var frequencies = new Array();
+    var query = "<?= $q ?>";
 
-    for (i = 0; i <10; i++) {
+    var json = {};
+    $.ajax({ 
+        url: "../cache/papers.json",
+        async: false,
+        dataType: "json",
+        success:function(data) {
+            json = data;
+            console.log(data);
+        }
+    });
+    var i = 0;
+    for (var key in json) {
+        papers[i] = new Paper();
+        papers[i].setTitle(json[key].title);
+        papers[i].setAuthors(json[key].authors);
+        papers[i].setConference(json[key].conference);
+        papers[i].setLink(json[key].link);
+        papers[i].setBibtex(json[key].bibtex);
+        papers[i].setAbstract(json[key].abstract);
+        papers[i].setContent(json[key].content);
+        papers[i].setKeywords(json[key].keywords);
+        i++;
+    }
+
+    
+
+    var sortedArray = new Array();
+
+    var myTable = document.getElementById("paperListTable");
+
+    var re = new RegExp(query, 'gi');
+
+    for (i=0; i < papers.length; i++) {
+        frequencies[i] = 0;
+        frequencies[i] = (papers[i].getContent().match(re) || []).length;
+    }
 
 
-        //tempfrequencies [i] = Math.random();
-        tempPapers[i] = new Paper();
-        tempPapers[i].setTitle("paper" + i );
-        tempPapers[i].setAuthors("Author" + i );
-        tempPapers[i].setConference("Conference" + i );
-        tempPapers[i].setLink("https://www.youtube.com/");
-        tempPapers[i].setBibtex("Bibtext" + i );
-
-}
-
-    var sortedArray = new Array()
-
-   var myTable = document.getElementById("paperListTable");
-         for (i=0; i < 10; i++) {
-            //var tr = document.createElement('TR');
-           
-            td.push(Math.floor(Math.random() * 15) + 1 );
-            td.push(tempPapers[i].getTitle());
-            td.push(tempPapers[i].getAuthors());
-            td.push(tempPapers[i].getConference());
-            td.push(tempPapers[i].getLink());
-            td.push(tempPapers[i].getBibtex());
+    for (i=0; i < papers.length; i++) {
+        //var tr = document.createElement('TR');
+        if (frequencies[i] > 0) {
+            td.push(frequencies[i]);
+            td.push(papers[i].getTitle());
+            td.push(papers[i].getAuthors());
+            td.push(papers[i].getConference());
+            td.push(papers[i].getLink());
+            td.push(papers[i].getBibtex());
             arrayOfArrays.push(td);
             td = [];
-            }
-            var max  = 0;
-            var counter = 0;
+        }
+    }
+            
+    var max  = 0;
+    var counter = 0;
+
     while(arrayOfArrays.length > 0){//while we have elements in the US array
         max = 0;
         for(j = 0; j<arrayOfArrays.length; j++){//find the element with the greatest frequency
@@ -142,18 +179,17 @@ var tempfrequencies = new Array();
         arrayOfArrays.splice(max,1);
         counter++;
 
-    }
-         
+    }     
 
-            for(z= 0; z < sortedArray.length; z++){
-                 var tr = document.createElement('TR');
-                for(p = 0; p<sortedArray[z].length; p++){
-                tdd = document.createElement('TD');
-                tdd.appendChild(document.createTextNode(sortedArray[z][p]));
-                tr.appendChild(tdd);
-                }
-                myTable.appendChild(tr);
-            }
+    for(z= 0; z < sortedArray.length; z++){
+         var tr = document.createElement('TR');
+        for(p = 0; p<sortedArray[z].length; p++){
+        tdd = document.createElement('TD');
+        tdd.appendChild(document.createTextNode(sortedArray[z][p]));
+        tr.appendChild(tdd);
+        }
+        myTable.appendChild(tr);
+    }
 
                
           
@@ -179,13 +215,7 @@ var tempfrequencies = new Array();
 
 
 </body>
-<script type = "text/javascript" src="../tableExport.jquery.plugin-master/jquery.js"></script>
-<script type = "text/javascript" src="../js/jspdf.js"></script>
-<script type = "text/javascript" src="../js/jquery-2.1.3.js"></script>
-<script type = "text/javascript" src="../js/pdfFromHTML.js"></script>
-<script type = "text/javascript" src="../tableExport.jquery.plugin-master/jquery.base64.js"></script>
-<script type = "text/javascript" src="../tableExport.jquery.plugin-master/tableExport.js"></script>
-<script type = "text/javascript" src="../tableExport.jquery.plugin-master/html2canvas.js"></script>
+
 
 
 </script>
