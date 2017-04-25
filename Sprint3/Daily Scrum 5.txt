@@ -5,9 +5,9 @@ QUESTIONS
 
 ANSWERS
 Arman Akhbari
-1) 
-2) 
-3)
+1) been looking at qunit testing
+2) Have been busy today with other classes
+3)Testing is going to be a big challenge since we dont know anything about it and need to learn it
 
 Brian Bares
 1)Been busy all day, so nothing as of this scrum.
