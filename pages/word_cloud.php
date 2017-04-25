@@ -54,7 +54,7 @@
 					
 					<input type="button" id="share" class="button" value="Share" disabled="true" />
              
-                    <a id="download" download="test.png"> <button type="button" class="button"> Download Image </button></a>    
+                    <a id="download" download="wordCloud.png"> <button type="button" class="button"> Download Image </button></a>    
 			        
 			    </div>
 			    
