@@ -53,8 +53,9 @@
 					<input type="button" id="add"  class="button" value="Add" disabled="true" />
 					
 					<input type="button" id="share" class="button" value="Share" disabled="true" />
-			       
-			        <input type="button" id="download" class="button" value="Download Image" />
+             
+                    <a id="download" download="test.png"> <button type="button" class="button"> Download Image </button></a>    
+			        
 			    </div>
 			    
 			</div>
@@ -356,7 +357,18 @@
 			var artistID = $("#paperSearchBar").attr("value");
 			addArtist(allArtists[artistID]);
 		});
+        
+        $("#download").click(function() {
+            var dl = document.getElementById("download");
+            var img = document.getElementById("lyricsCloudCanvas").toDataURL("image/png")
+                    .replace("image/png", "image/octet-stream");
+			  dl.setAttribute("href", img);
+        });
+        
+       
 
+
+        
 
 			
 	</script>
