@@ -10,9 +10,9 @@ Arman Akhbari
 3)
 
 Brian Bares
-1)
-2)  
-3)
+1)Been busy all day, so nothing as of this scrum.
+2)  Tonight I'll work on implementing search by keyword. Don't know if I'll finish but I'll start before I go to sleep
+3) Just the usual time crunch, I couldn't work on it today because my family made plans for my brother's birthday but I'll work on the project tonight and try to catch up.
 
 Shokoufeh Namazian
 1) Worked on UML, black box , and figure out refactoring 
