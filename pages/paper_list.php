@@ -232,11 +232,20 @@ if ("<?= $au ?>" != "") { //if an author search
             for(z= 0; z < sortedArray.length; z++){
                  var tr = document.createElement('TR');
                 for(p = 0; p<sortedArray[z].length; p++){
-                    if (p == 4) {
+                    if (p == 4) { //change link text to an actual link to find paper in IEEE database
                         tdd = document.createElement('TD');
                         var link = document.createElement("a");
                         link.setAttribute("href", sortedArray[z][4]);
                         var linkText = document.createTextNode(sortedArray[z][4]);
+                        link.appendChild(linkText);
+                        tdd.appendChild(link);
+                        tr.appendChild(tdd);
+                    } 
+                    else if (p == 1) { //change title text to a link that shows abstract with words highlighted
+                        tdd = document.createElement('TD');
+                        var link = document.createElement("a");
+                        link.setAttribute("href", "abstract_page.php?query="+sortedArray[z][1], "_self", false);
+                        var linkText = document.createTextNode(sortedArray[z][1]);
                         link.appendChild(linkText);
                         tdd.appendChild(link);
                         tr.appendChild(tdd);
