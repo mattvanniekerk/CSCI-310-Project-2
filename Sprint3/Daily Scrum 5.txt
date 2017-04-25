@@ -1,0 +1,26 @@
+QUESTIONS
+1) What did I do yesterday that helped the Development Team meet the Sprint Goal?
+2) What will I do today to help the Development Team meet the Sprint Goal?
+3) Do I see any impediment that prevents me or the Development Team from meeting the Sprint Goal?
+
+ANSWERS
+Arman Akhbari
+1) 
+2) 
+3)
+
+Brian Bares
+1)
+2)  
+3)
+
+Shokoufeh Namazian
+1) Worked on UML, black box , and figure out refactoring 
+2) I did black box for requirement 3.
+3) Still need to complete XP practice and more black box 
+
+
+Matthew van Niekerk
+1)
+2)
+3)
