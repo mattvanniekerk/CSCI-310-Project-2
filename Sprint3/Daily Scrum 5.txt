@@ -1,0 +1,26 @@
+QUESTIONS
+1) What did I do yesterday that helped the Development Team meet the Sprint Goal?
+2) What will I do today to help the Development Team meet the Sprint Goal?
+3) Do I see any impediment that prevents me or the Development Team from meeting the Sprint Goal?
+
+ANSWERS
+Arman Akhbari
+1) been looking at qunit testing
+2) Have been busy today with other classes
+3)Testing is going to be a big challenge since we dont know anything about it and need to learn it
+
+Brian Bares
+1)Been busy all day, so nothing as of this scrum.
+2)  Tonight I'll work on implementing search by keyword. Don't know if I'll finish but I'll start before I go to sleep
+3) Just the usual time crunch, I couldn't work on it today because my family made plans for my brother's birthday but I'll work on the project tonight and try to catch up.
+
+Shokoufeh Namazian
+1) Worked on UML, black box , and figure out refactoring 
+2) I did black box for requirement 3.
+3) Still need to complete XP practice and more black box 
+
+
+Matthew van Niekerk
+1) Finished functionality to populate the paper list, except that it listed all papers that contain the clicked word, not only the searched-for author's papers. Due to Brian's ego problems, he decided to work on the same thing as me--even after I finished, and even though he knew he was doing the same thing. I stopped for the night before limiting the list to the specific author, but Brian kept going and eventually finished it himself, including the author filter, then scrapped my work :|
+2) I think I will work on either search history or the functionality to click on a conference in the paper list, depending on what others are working on.
+3) Working on the same thing independently wastes what precious little time we have. I hope that doesn't happen again. 

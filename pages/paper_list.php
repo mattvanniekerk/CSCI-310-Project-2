@@ -1,3 +1,9 @@
+<?php 
+    $q = $_GET["query"];
+    $au = $_GET["au"];
+    $n = $_GET["num"];
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -7,8 +13,15 @@
 <head>
     <title>CSCI310</title>
   
-    <h1 id="myHeader">  Hi  </h1>
-  
+    <h1 id="myHeader">  Papers matching "<?= $q ?>" </h1>
+    <script type = "text/javascript" src="../tableExport.jquery.plugin-master/jquery.js"></script>
+    <script type = "text/javascript" src="../js/jspdf.js"></script>
+    <script type = "text/javascript" src="../js/jquery-2.1.3.js"></script>
+    <script type = "text/javascript" src="../js/pdfFromHTML.js"></script>
+    <script type = "text/javascript" src="../tableExport.jquery.plugin-master/jquery.base64.js"></script>
+    <script type = "text/javascript" src="../tableExport.jquery.plugin-master/tableExport.js"></script>
+    <script type = "text/javascript" src="../tableExport.jquery.plugin-master/html2canvas.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
  
 </head>
 
@@ -28,109 +41,180 @@
     </tr>
     <script>
 
-function Paper(){
-    this.title = "";
-    this.authors = [];
-    this.conference = "";
-    this.link = "";
-    this.abstract = "";
-    this.content = "";
-    this.bibtex = "";
-    this.keywords = [];
+    function Paper(){
+        this.title = "";
+        this.authors = [];
+        this.conference = "";
+        this.link = "";
+        this.abstract = "";
+        this.content = "";
+        this.bibtex = "";
+        this.keywords = [];
 
-    this.getKeywords = function getKeywords(){
-        return this.keywords;
-    }
-    this.setKeywords = function setKeywords(arg){
-        keywords = arg;
+        this.getKeywords = function getKeywords(){
+            return this.keywords;
+        }
+        this.setKeywords = function setKeywords(arg){
+            keywords = arg;
+        }
+
+        this.getTitle = function getTitle(){
+            return this.title;
+        }
+        this.setTitle = function setTitle(arg){
+            this.title = arg;
+        }
+        this.getAuthors = function getAuthors(){
+            return this.authors;
+        }
+        this.setAuthors = function setAuthors(arg){
+             this.authors = arg;
+        }
+        this.getConference = function getConference(){
+            return this.conference;
+        }
+        this.setConference = function setConference(arg){
+            this.conference = arg;
+        }
+        this.getContent = function getContent(){
+            return this.content;
+        }
+        this.setContent = function setContent(arg){
+             this.content = arg;
+        }
+        this.getAbstract = function getAbstract(){
+            return this.abstract;
+        }
+        this.setAbstract = function setAbstract(arg){
+            this.abstract;
+        }
+        this.setLink = function setLink(arg){
+            this.link = arg;
+        }
+        this.getLink = function getLink(){
+            return this.link;
+        }
+        this.setBibtex = function setBibtex(arg){
+            this.bibtex = arg;
+        }
+        this.getBibtex = function getBibtex(){
+            return this.bibtex;
+        }
+
     }
 
-    this.getTitle = function getTitle(){
-        return this.title;
-    }
-    this.setTitle = function setTitle(arg){
-        this.title = arg;
-    }
-    this.getAuthors = function getAuthors(){
-        return this.authors;
-    }
-    this.setAuthors = function setAuthors(arg){
-         this.authors = arg;
-    }
-    this.getConference = function getConference(){
-        return this.conference;
-    }
-    this.setConference = function setConference(arg){
-        this.conference = arg;
-    }
-    this.getContent = function getContent(){
-        return this.content;
-    }
-    this.setContent = function setContent(arg){
-         this.content = arg;
-    }
-    this.getAbstract = function getAbstract(){
-        return this.abstract;
-    }
-    this.setAbstract = function setAbstract(arg){
-        this.abstract;
-    }
-    this.setLink = function setLink(arg){
-        this.link = arg;
-    }
-    this.getLink = function getLink(){
-        return this.link;
-    }
-    this.setBibtex = function setBibtex(arg){
-        this.bibtex = arg;
-    }
-    this.getBibtex = function getBibtex(){
-        return this.bibtex;
-    }
-
-}
+        
+    var json = {};
+    $.ajax({ 
+        url: "../cache/papers.json",
+        async: false,
+        dataType: "json",
+        success:function(data) {
+            json = data;
+            console.log(data);
+        }
+    });
 
 
-
-
-
-
+var papersUsed = new Array();
+var frequencies = new Array();
+    
 var td = new Array();
 var arrayOfArrays = new Array();
 var tr = new Array();
-var tempPapers = new Array();
-var tempfrequencies = new Array();
+        
 
-    for (i = 0; i <10; i++) {
-
-
-        //tempfrequencies [i] = Math.random();
-        tempPapers[i] = new Paper();
-        tempPapers[i].setTitle("paper" + i );
-        tempPapers[i].setAuthors("Author" + i );
-        tempPapers[i].setConference("Conference" + i );
-        tempPapers[i].setLink("https://www.youtube.com/");
-        tempPapers[i].setBibtex("Bibtext" + i );
-
+        
+        
+        
+if ("<?= $au ?>" != "") { //if an author search
+    //var allWords = "";
+    var counter = 0;
+    for (var key in json) {
+        if (papersUsed.length < "<?= $n ?>") {
+            for (k = 0; k < json[key].authors.length; k++) {
+                if (json[key].authors[k].toLowerCase() == "<?= $au ?>".toLowerCase()) {
+                    //see if word shows up in this particular paper; if so, proceed as normal
+                    var paperContent = json[key].content.split(" ");
+                    for (j = 0; j < paperContent.length; j++) {
+                        if (paperContent[j].toLowerCase() == "<?= $q ?>".toLowerCase()) {
+                            frequencies[counter] = frequencies[counter] ? frequencies[counter] + 1 : 1;
+                        }
+                    }
+                    if (frequencies[counter] > 0) {
+                        papersUsed[counter] = new Paper();
+                        papersUsed[counter].setTitle(json[key].title);
+                        papersUsed[counter].setAuthors(json[key].authors);
+                        papersUsed[counter].setConference(json[key].conference);
+                        papersUsed[counter].setLink(json[key].link);
+                        papersUsed[counter].setBibtex(json[key].bibtex);
+                        papersUsed[counter].setContent(json[key].content);
+                        papersUsed[counter].setAbstract(json[key].abstract);
+                        papersUsed[counter].setKeywords(json[key].keywords);
+                        //determineFrequency("", counter);
+                        counter++;
+                    }
+                }
+            }
+        }
+    }
 }
+    else {
+        var counter = 0;
+        for (var key in json) { //for each paper
+            if (papersUsed.length < "<?= $n ?>") { //if we haven't hit the number article max defined by user
+                if (json[key].content.includes("<?= $q ?>")) { //if query string is contained in paper
+                    //count frequency of query
+                    var timesOccurred = (json[key].content.match(/<?= $q ?>/g));
+                    frequencies[counter] = timesOccurred.length;
+                    console.log(timesOccurred);
+                } else {
+                    for (i = 0; i < json[key].keywords.length; i++) {
+                        /*not even sure why I even bother here because if the word isn't in the content,
+                        it's most likely not in the keywords. I literally only keep this here in the very
+                        small off chance that a search term shows up in keywords but not in content.
+                        Anyway, once it finds it in the keywords, break because it won't be listed more than once
+                        */
+                        if (json[key].keywords[i].toLowerCase() == "<?= $q ?>".toLowerCase()) {
+                            frequencies[counter] = 1;
+                            break;
+                        }
+                    }
+                }
+                if (frequencies[counter] > 0) {
+                    papersUsed[counter] = new Paper();
+                    papersUsed[counter].setTitle(json[key].title);
+                    papersUsed[counter].setAuthors(json[key].authors);
+                    papersUsed[counter].setConference(json[key].conference);
+                    papersUsed[counter].setLink(json[key].link);
+                    papersUsed[counter].setBibtex(json[key].bibtex);
+                    papersUsed[counter].setContent(json[key].content);
+                    papersUsed[counter].setAbstract(json[key].abstract);
+                    papersUsed[counter].setKeywords(json[key].keywords);
+                    //determineFrequency("", counter);
+                    counter++;
+                }
+            }
+        }
+    }
+
 
     var sortedArray = new Array()
 
    var myTable = document.getElementById("paperListTable");
-         for (i=0; i < 10; i++) {
+         for (i = 0; i < papersUsed.length; i++) {
             //var tr = document.createElement('TR');
-           
-            td.push(Math.floor(Math.random() * 15) + 1 );
-            td.push(tempPapers[i].getTitle());
-            td.push(tempPapers[i].getAuthors());
-            td.push(tempPapers[i].getConference());
-            td.push(tempPapers[i].getLink());
-            td.push(tempPapers[i].getBibtex());
+            td.push(frequencies[i]);
+            td.push(papersUsed[i].getTitle());
+            td.push(papersUsed[i].getAuthors());
+            td.push(papersUsed[i].getConference());
+            td.push(papersUsed[i].getLink());
+            td.push(papersUsed[i].getBibtex());
             arrayOfArrays.push(td);
             td = [];
             }
             var max  = 0;
-            var counter = 0;
+            counter = 0;
     while(arrayOfArrays.length > 0){//while we have elements in the US array
         max = 0;
         for(j = 0; j<arrayOfArrays.length; j++){//find the element with the greatest frequency
@@ -148,12 +232,32 @@ var tempfrequencies = new Array();
             for(z= 0; z < sortedArray.length; z++){
                  var tr = document.createElement('TR');
                 for(p = 0; p<sortedArray[z].length; p++){
-                tdd = document.createElement('TD');
-                tdd.appendChild(document.createTextNode(sortedArray[z][p]));
-                tr.appendChild(tdd);
+                    if (p == 4) { //change link text to an actual link to find paper in IEEE database
+                        tdd = document.createElement('TD');
+                        var link = document.createElement("a");
+                        link.setAttribute("href", sortedArray[z][4]);
+                        var linkText = document.createTextNode(sortedArray[z][4]);
+                        link.appendChild(linkText);
+                        tdd.appendChild(link);
+                        tr.appendChild(tdd);
+                    } 
+                    else if (p == 1) { //change title text to a link that shows abstract with words highlighted
+                        tdd = document.createElement('TD');
+                        var link = document.createElement("a");
+                        link.setAttribute("href", "abstract_page.php?query="+sortedArray[z][1], "_self", false);
+                        var linkText = document.createTextNode(sortedArray[z][1]);
+                        link.appendChild(linkText);
+                        tdd.appendChild(link);
+                        tr.appendChild(tdd);
+                    } else{
+                        tdd = document.createElement('TD');
+                        tdd.appendChild(document.createTextNode(sortedArray[z][p]));
+                        tr.appendChild(tdd);
+                    }
                 }
                 myTable.appendChild(tr);
             }
+
 
                
           
@@ -179,16 +283,9 @@ var tempfrequencies = new Array();
 
 
 </body>
-<script type = "text/javascript" src="../tableExport.jquery.plugin-master/jquery.js"></script>
-<script type = "text/javascript" src="../js/jspdf.js"></script>
-<script type = "text/javascript" src="../js/jquery-2.1.3.js"></script>
-<script type = "text/javascript" src="../js/pdfFromHTML.js"></script>
-<script type = "text/javascript" src="../tableExport.jquery.plugin-master/jquery.base64.js"></script>
-<script type = "text/javascript" src="../tableExport.jquery.plugin-master/tableExport.js"></script>
-<script type = "text/javascript" src="../tableExport.jquery.plugin-master/html2canvas.js"></script>
 
 
-</script>
+
 
 <script>
 

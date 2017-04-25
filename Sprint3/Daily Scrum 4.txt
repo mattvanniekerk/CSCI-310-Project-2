@@ -10,9 +10,9 @@ Arman Akhbari
 3)Now we need to see how to do testing and we have no idea.
 
 Brian Bares
-1)
-2)
-3)
+1)Author search with our dummy database now works correctly. We can search for an author and generate a word cloud for him/her.
+2)WELLLLL I was gonna put that I was gonna figure out how to correctly feed the data into the paper_list.php page, but I just finished that. However since I finished it AFTER the scrum and I'm just writing this a little late cause I was so busy working on it, I"m just gonna put it here and say that it counts.
+3)Deadline fast approaching and I have two other major assignments due
 
 Shokoufeh Namazian
 1) I was woking on document and UML
@@ -20,6 +20,6 @@ Shokoufeh Namazian
 3) A lot of black box left and xp practices.
 
 Matthew van Niekerk
-1)
-2)
-3)
+1) Implemented functionality to search for author and generate word cloud from dummy database. 
+2) Work on functionality to populate the paper list
+3) Still have to finish the implementation, then do testing, but I have other assignments and events that need my attention. 
