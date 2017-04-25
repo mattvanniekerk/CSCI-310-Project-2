@@ -13,7 +13,7 @@
 <head>
     <title>CSCI310</title>
   
-    <h1 id="myHeader">  Papers matching <?= $q ?> </h1>
+    <h1 id="myHeader">  Papers matching "<?= $q ?>" </h1>
     <script type = "text/javascript" src="../tableExport.jquery.plugin-master/jquery.js"></script>
     <script type = "text/javascript" src="../js/jspdf.js"></script>
     <script type = "text/javascript" src="../js/jquery-2.1.3.js"></script>
