@@ -20,6 +20,6 @@ Shokoufeh Namazian
 3) A lot of black box left and xp practices.
 
 Matthew van Niekerk
-1)
-2)
-3)
+1) Implemented functionality to search for author and generate word cloud from dummy database. 
+2) Work on functionality to populate the paper list
+3) Still have to finish the implementation, then do testing, but I have other assignments and events that need my attention. 
