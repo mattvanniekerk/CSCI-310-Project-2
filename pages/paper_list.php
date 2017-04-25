@@ -159,6 +159,44 @@ if ("<?= $au ?>" != "") { //if an author search
         }
     }
 }
+    else {
+        var counter = 0;
+        for (var key in json) { //for each paper
+            if (papersUsed.length < "<?= $n ?>") { //if we haven't hit the number article max defined by user
+                if (json[key].content.includes("<?= $q ?>")) { //if query string is contained in paper
+                    //count frequency of query
+                    var timesOccurred = (json[key].content.match(/<?= $q ?>/g));
+                    frequencies[counter] = timesOccurred.length;
+                    console.log(timesOccurred);
+                } else {
+                    for (i = 0; i < json[key].keywords.length; i++) {
+                        /*not even sure why I even bother here because if the word isn't in the content,
+                        it's most likely not in the keywords. I literally only keep this here in the very
+                        small off chance that a search term shows up in keywords but not in content.
+                        Anyway, once it finds it in the keywords, break because it won't be listed more than once
+                        */
+                        if (json[key].keywords[i].toLowerCase() == "<?= $q ?>".toLowerCase()) {
+                            frequencies[counter] = 1;
+                            break;
+                        }
+                    }
+                }
+                if (frequencies[counter] > 0) {
+                    papersUsed[counter] = new Paper();
+                    papersUsed[counter].setTitle(json[key].title);
+                    papersUsed[counter].setAuthors(json[key].authors);
+                    papersUsed[counter].setConference(json[key].conference);
+                    papersUsed[counter].setLink(json[key].link);
+                    papersUsed[counter].setBibtex(json[key].bibtex);
+                    papersUsed[counter].setContent(json[key].content);
+                    papersUsed[counter].setAbstract(json[key].abstract);
+                    papersUsed[counter].setKeywords(json[key].keywords);
+                    //determineFrequency("", counter);
+                    counter++;
+                }
+            }
+        }
+    }
 
 
     var sortedArray = new Array()

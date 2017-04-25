@@ -144,6 +144,29 @@
             }
             
         }
+        if("<?= $t ?>" == "Search by keyword") {
+            for (var key in json) {
+                if (allWords.length < "<?= $n ?>") {
+                    if (json[key].content.includes("<?= $q ?>")) {
+                        allWords.push(json[key].content);
+                        continue;
+                    }
+                    /*if keyword appears in content, add to word cloud. This method of adding words to the
+                    word cloud allows users to either search for an arbitrary term or phrase,
+                    or to search for a paper that explicitly defines it as a keyword.
+                    Content "if" check accounts for the arbitrary term scenario, while we
+                    keep the keyword search loop just in case a search term is a keyword
+                    but not explicitly stated in the paper content
+                    */
+                    for (i = 0; i< json[key].keywords.length; i++) {
+                        if (json[key].keywords[i].toLowerCase() == "<?= $q ?>".toLowerCase()) {
+                            allWords.push(json[key].content)
+                            break; //if keyword matches, add content and move to next paper
+                        }
+                    }
+                }
+            }
+        }
         
       
 
@@ -240,6 +263,7 @@
 			
 			var maxSize = 60;
 			var minSize = 14;
+            
 			
 			var currentMax = words[0].size;
 			var currentMin = words[words.length-1].size;
@@ -284,7 +308,7 @@
                             if ("<?= $t ?>" == "Search by author") { //this leaves a space in the author name! Fix later
                                 window.open("paper_list.php?query="+word+"&au=<?= $q ?>&num=<?= $n ?>", "_self", false);
                             } else {
-                                window.open("paper_list.php?query="+word, "_self", false);
+                                window.open("paper_list.php?query="+word+"&num=<?= $n ?>", "_self", false);
                             }
 							//loadPage("paperList");
                             
