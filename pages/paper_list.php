@@ -232,12 +232,14 @@ if ("<?= $au ?>" != "") { //if an author search
             for(z= 0; z < sortedArray.length; z++){
                  var tr = document.createElement('TR');
                 for(p = 0; p<sortedArray[z].length; p++){
-                    if (p == 1) {
+                    if (p == 4) {
+                        tdd = document.createElement('TD');
                         var link = document.createElement("a");
                         link.setAttribute("href", sortedArray[z][4]);
-                        var linkText = document.createTextNode(sortedArray[z][1]);
+                        var linkText = document.createTextNode(sortedArray[z][4]);
                         link.appendChild(linkText);
-                        tr.appendChild(link);
+                        tdd.appendChild(link);
+                        tr.appendChild(tdd);
                     } else{
                         tdd = document.createElement('TD');
                         tdd.appendChild(document.createTextNode(sortedArray[z][p]));
