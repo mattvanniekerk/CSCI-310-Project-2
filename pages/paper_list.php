@@ -232,9 +232,17 @@ if ("<?= $au ?>" != "") { //if an author search
             for(z= 0; z < sortedArray.length; z++){
                  var tr = document.createElement('TR');
                 for(p = 0; p<sortedArray[z].length; p++){
-                tdd = document.createElement('TD');
-                tdd.appendChild(document.createTextNode(sortedArray[z][p]));
-                tr.appendChild(tdd);
+                    if (p == 1) {
+                        var link = document.createElement("a");
+                        link.setAttribute("href", sortedArray[z][4]);
+                        var linkText = document.createTextNode(sortedArray[z][1]);
+                        link.appendChild(linkText);
+                        tr.appendChild(link);
+                    } else{
+                        tdd = document.createElement('TD');
+                        tdd.appendChild(document.createTextNode(sortedArray[z][p]));
+                        tr.appendChild(tdd);
+                    }
                 }
                 myTable.appendChild(tr);
             }
