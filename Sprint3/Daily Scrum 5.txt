@@ -21,6 +21,6 @@ Shokoufeh Namazian
 
 
 Matthew van Niekerk
-1)
-2)
-3)
+1) Finished functionality to populate the paper list, except that it listed all papers that contain the clicked word, not only the searched-for author's papers. Due to Brian's ego problems, he decided to work on the same thing as me--even after I finished, and even though he knew he was doing the same thing. I stopped for the night before limiting the list to the specific author, but Brian kept going and eventually finished it himself, including the author filter, then scrapped my work :|
+2) I think I will work on either search history or the functionality to click on a conference in the paper list, depending on what others are working on.
+3) Working on the same thing independently wastes what precious little time we have. I hope that doesn't happen again. 
