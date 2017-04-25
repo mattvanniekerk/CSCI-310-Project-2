@@ -34,6 +34,9 @@
 
     </head>
     <body>
+    	<div id="myProgress">
+  			<div id="myBar">10%</div>
+		</div>
         <div id="page">
  
 			<div id="wordCloudPage">
@@ -59,9 +62,23 @@
 			    
 			</div>
 		</div>
+
 	</body>
 
 	<style>
+	#myProgress {
+    width: 50%;
+    background-color: grey;
+	}
+	#myBar {
+		width: 10%;
+		height: 30%
+	    width: 1%;
+	    height: 30px;
+	    text-align: center; /* To center it horizontally (if you want) */
+    	line-height: 30px;
+	    background-color: red;
+	}
 
 	#wordCloudPage {
 		text-align: center;
@@ -112,8 +129,27 @@
         
        /* $.getJSON("../cache/papers.json", function(json) {
             console.log(json);
+
         });*/
-        
+        //progression bar
+        function move() {
+			    var elem = document.getElementById("myBar");
+			    var width = 10;
+			    var id = setInterval(frame, 10);
+			    function frame() {
+			        if (width >= 100) {
+			            clearInterval(id);
+			        } else {
+			            width = width + 10;
+			            elem.style.width = width + '%';
+	            		elem.innerHTML = width * 1 + '%';
+			        }
+	    		}
+		}	
+        $(window).load(function() {
+    		move();
+		});
+
         var json = {};
         $.ajax({ 
             url: "../cache/papers.json",
@@ -123,7 +159,7 @@
                 json = data;
                 console.log(data);
             }
-        });
+         });
         
         for (var key in json) {
             console.log(json[key].authors[0]);
@@ -301,7 +337,7 @@
 			  .start();
         }
         generatePaperCloud();
-       
+		//move();
 		
 		// Set up the Artist Search Bar
 		/*$("#paperSearchBar")
@@ -317,6 +353,7 @@
 
 		// Set up the Search Button
 		$('#search').click(function() {
+
 			
 			$("#paperSearchBar").trigger('clear');
 			
