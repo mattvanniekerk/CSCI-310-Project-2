@@ -249,12 +249,36 @@ if ("<?= $au ?>" != "") { //if an author search
                         link.appendChild(linkText);
                         tdd.appendChild(link);
                         tr.appendChild(tdd);
-                    } else{
+                    } /*else if (p == 2) {
+                        var docFrag = document.createDocumentFragment();
+                        for (i = 0; i < sortedArray[z][p].length; i++) { //for each author
+                            tdd = document.createElement('TD');
+                            var link = document.createElement("a");
+                            link.setAttribute("href", "word_cloud.php?query="+sortedArray[z][p][i]+"&search_type=Search by+author&num_articles=<?= $n ?>", "_self", false);
+                            if (i == (sortedArray[z][p].length-1)) {
+                                var linkText = document.createTextNode(sortedArray[z][p][i]);
+                            }
+                            else {
+                                var linkText = document.createTextNode(sortedArray[z][p][i]+", ");
+                            }
+                            link.appendChild(linkText);
+                            tdd.appendChild(link);
+                            docFrag.appendChild(tdd);
+                        }
+                        fragTDD = document.createElement('TD');
+                        fragTDD.appendChild(docFrag);
+                        fragTDD.style.width = '10px';
+                        tr.appendChild(fragTDD);
+                        //tr.appendChild(docFrag);
+                        
+                    }*/
+                        else{
                         tdd = document.createElement('TD');
                         tdd.appendChild(document.createTextNode(sortedArray[z][p]));
                         tr.appendChild(tdd);
                     }
                 }
+                
                 myTable.appendChild(tr);
             }
 
