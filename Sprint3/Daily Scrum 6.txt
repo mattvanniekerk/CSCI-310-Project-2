@@ -5,7 +5,9 @@ QUESTIONS
 
 ANSWERS
 Arman Akhbari
- 
+ 1)I managed to get progress bar to work
+ 2)I'm going to meet with David and actually start writing tests.
+ 3)I wish we had met with David from sprint 1 instead of Halfond.
 
 Brian Bares
 1)Search by keyword has been implemented. It searches each paper's keywords, but also searches through a paper's contents so a user can input any arbitrary term and it'll create a word cloud of all the papers that contain that word, so that a user doesn't have to know and search for a small handful of words in our small database of papers. I believe it offers more flexibility that way, but in any case, the latter functionality can be commented if it's deemed unnecessary.
