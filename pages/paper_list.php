@@ -249,8 +249,11 @@ if ("<?= $au ?>" != "") { //if an author search
                         link.appendChild(linkText);
                         tdd.appendChild(link);
                         tr.appendChild(tdd);
-                    } /*else if (p == 2) {
-                        var docFrag = document.createDocumentFragment();
+                    } else if (p == 2) {
+
+                        var cellTable = document.createElement("TABLE");
+                        cellTable.setAttribute("id", "authorTable");
+                        var cellToAdd = document.createElement("TD");
                         for (i = 0; i < sortedArray[z][p].length; i++) { //for each author
                             tdd = document.createElement('TD');
                             var link = document.createElement("a");
@@ -263,15 +266,16 @@ if ("<?= $au ?>" != "") { //if an author search
                             }
                             link.appendChild(linkText);
                             tdd.appendChild(link);
-                            docFrag.appendChild(tdd);
+                            //docFrag.appendChild(tdd);
+                            var newRow = document.createElement("TR");
+                            newRow.appendChild(tdd);
+                            cellTable.appendChild(newRow);
                         }
-                        fragTDD = document.createElement('TD');
-                        fragTDD.appendChild(docFrag);
-                        fragTDD.style.width = '10px';
-                        tr.appendChild(fragTDD);
-                        //tr.appendChild(docFrag);
-                        
-                    }*/
+
+
+                        cellToAdd.appendChild(cellTable);
+                        tr.appendChild(cellToAdd);
+                    }
                         else{
                         tdd = document.createElement('TD');
                         tdd.appendChild(document.createTextNode(sortedArray[z][p]));
