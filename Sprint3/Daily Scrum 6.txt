@@ -16,11 +16,12 @@ I don't remember mentioning this in the last scrum notes but I worked on impleme
 3) The salt is real
 
 Shokoufeh Namazian
- 
 1)I did some REQ black box test.
 2) I work on 2 more REQ black box  tests.
 3) I need to complete black box test and xp practices.
 
 
 Matthew van Niekerk
- 
+1) Unfortunately, I did not have time to work on the project.
+2) Implement search history.
+3) I have a seven-page research paper to write by Friday, so it will be difficult to balance both projects.
