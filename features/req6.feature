@@ -5,7 +5,7 @@ Feature: req 6  Status bar for current progress in generating the word cloud
 
      Scenario: Searching for a last name that have a paper in the IEEE and ACM library
      Given the user searches
-     Then the IEEE search bar should be empty
+     Then the IEEE search bar should not be empty
 
 
 
