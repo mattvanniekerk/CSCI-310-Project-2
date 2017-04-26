@@ -319,7 +319,7 @@ if ("<?= $au ?>" != "") { //if an author search
 
     <button id = "downloadAsPDF" onClick = "HTMLtoPDF()"> Download List (PDF)</button>
     <button id = "downloadAsTXT" onClick="HTMLtoTXT()"> Download List (TXT)</button>
-    <button id = "generateSubsetCloud"> Generate Cloud from Selected Papers</button>
+    <button id = "generateSubsetCloud" onClick= "generateSubsetCloud()"> Generate Cloud from Selected Papers</button>
     <button id = "backToCloud"> Back to Cloud Page</button>
     <br>
     <button id = "RunIt" onClick="sortTable()"> Run Program</button>
@@ -349,6 +349,20 @@ var pageLink = "";
 
 
 var fileName =  'tags.html';
+    
+    
+function generateSubsetCloud() {
+    for (i = 0; i < sortedArray.length; i++) {
+        var result = document.getElementById(sortedArray[i][1]+" box").checked;
+        //console.log(result);
+        if (result) { //if box was checked
+            //TODO: pass papers to be used in new word cloud to word_cloud.php
+            //Figure out how to pass in multiple parameters with the same name i.e. ?title=something&title=something&title...
+            //Then append to the if(authorSearch) else if (keywordSearch) conditional to include else if (arrayOfPapers)
+            //Then generate word cloud from paper content
+        }
+    }
+}
 
 
 function HTMLtoTXT(){
