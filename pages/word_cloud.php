@@ -42,6 +42,7 @@
 			<div id="wordCloudPage">
 			    
 			    <h1 id="wordCloudTitle">Word Cloud Page for <?= $q ?></h1>
+			    <h4 id="subsetTitles"></h4>
 				<div id="wordCloud">
 					<div id="wordCloudLoading" style="display:none"><img src="components/loading.gif" width=100 height=100></div>
 					<svg id="wordCloudSVG"></svg>
@@ -203,6 +204,42 @@
                     }
                 }
             }
+        }
+        if("<?= $t ?>" == "subset") {
+            var subParams = <?php
+                $subQ = $q;
+                echo json_encode($subQ);
+            ?>;
+            //console.log(subParams.length);
+           
+            document.getElementById("wordCloudTitle").innerHTML = "Word Cloud for subset containing papers: ";
+            var titles = "";
+            for (i = 0; i < subParams.length; i++) {
+                titles += subParams[i];
+                if (i != subParams.length-1) {
+                    titles += "<br>";
+                }
+            }
+            document.getElementById("subsetTitles").innerHTML = titles;
+            
+            for (var key in json) {
+                if ((allWords.length < "?= $n ?>") || (allWords.length < subParams.length)) {
+                    //stop if surpass number of papers user wants or if we already
+                    //added the appropriate number of papers
+                    for (i = 0; i < subParams.length; i++) {
+                        if (json[key].title.toLowerCase() == subParams[i].toLowerCase()) {
+                            //if title in database matches query string, add to word cloud
+                            allWords.push(json[key].content);
+                            console.log(allWords.length);
+                            }
+                    }
+                }
+            }
+            /*
+            TODO: MODIFY PAPER_LIST SO THAT IT RECEIVES THE WORD_CLOUD QUERIES AND ONLY RETURNS RESULTS
+            WITH THOSE PAPERS
+            */
+            
         }
         
       

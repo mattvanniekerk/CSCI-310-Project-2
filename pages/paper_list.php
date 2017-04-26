@@ -352,6 +352,7 @@ var fileName =  'tags.html';
     
     
 function generateSubsetCloud() {
+    var paramsToPass = "?search_type=subset&num_articles=<?= $n ?>";
     for (i = 0; i < sortedArray.length; i++) {
         var result = document.getElementById(sortedArray[i][1]+" box").checked;
         //console.log(result);
@@ -360,8 +361,11 @@ function generateSubsetCloud() {
             //Figure out how to pass in multiple parameters with the same name i.e. ?title=something&title=something&title...
             //Then append to the if(authorSearch) else if (keywordSearch) conditional to include else if (arrayOfPapers)
             //Then generate word cloud from paper content
+            paramsToPass += "&query[]="+sortedArray[i][1];
+            //adds title of paper to parameters to be searched
         }
     }
+    window.open("word_cloud.php"+paramsToPass, "_self", false);
 }
 
 
