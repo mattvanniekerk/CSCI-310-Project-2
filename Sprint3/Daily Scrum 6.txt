@@ -8,7 +8,10 @@ Arman Akhbari
  
 
 Brian Bares
-
+1)Search by keyword has been implemented. It searches each paper's keywords, but also searches through a paper's contents so a user can input any arbitrary term and it'll create a word cloud of all the papers that contain that word, so that a user doesn't have to know and search for a small handful of words in our small database of papers. I believe it offers more flexibility that way, but in any case, the latter functionality can be commented if it's deemed unnecessary.
+I don't remember mentioning this in the last scrum notes but I worked on implementing the abstract page. The paper_list page properly redirects the user to the abstract page, which is populated with the paper's abstract and a download PDF button, though the button does not yet work. Additionally, users can now download an image of the word cloud.
+2) I was gonna put that I was planning to implement conducting a new search based on an author when a user clicks his/her name in the author list, but I ended up completing that. Same deal as scrum 4 (or 5?), I'm just gonna put that here because I finished it after we finished the scrum.
+3) The salt is real
 
 Shokoufeh Namazian
  
