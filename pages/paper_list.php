@@ -30,6 +30,7 @@
      <div id = "HTMLtoPDF">
     <table id = "paperListTable" border="1">
     <tr>
+        <th id = "paperCheckbox" style="padding:0 15px 0 15px;"> </th>
         <th id = "paperFrequency" style="padding:0 15px 0 15px;">  Frequency</th>
         <th id = "paperTitle" style="padding:0 15px 0 15px;"> Title</th>
         <th id = "paperAuthor" style="padding:0 15px 0 15px;"> Author</th>
@@ -231,7 +232,23 @@ if ("<?= $au ?>" != "") { //if an author search
 
             for(z= 0; z < sortedArray.length; z++){
                  var tr = document.createElement('TR');
+                var checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.name = sortedArray[z][1];
+                checkbox.value = sortedArray[z][1];
+                checkbox.id = (sortedArray[z][1]+" box");
                 for(p = 0; p<sortedArray[z].length; p++){
+                    if (p == 0) {
+                        //adding it to a cell first centers the checkbox to the middle of the cell
+                        var checkboxCell = document.createElement("TD");
+                        checkboxCell.appendChild(checkbox);
+                        tr.appendChild(checkboxCell);
+                        /* Haha so this is totally unintended but apparently having this here and then
+                        letting the loop evaluate as normal means that I was able to add the checkbox
+                        column without touching the rest of the loop and figuring out how to
+                        get it to append the nodes in the right spot : ^)
+                        */
+                    }
                     if (p == 4) { //change link text to an actual link to find paper in IEEE database
                         tdd = document.createElement('TD');
                         var link = document.createElement("a");
