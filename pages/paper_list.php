@@ -319,6 +319,7 @@ if ("<?= $au ?>" != "") { //if an author search
 
     <button id = "downloadAsPDF" onClick = "HTMLtoPDF()"> Download List (PDF)</button>
     <button id = "downloadAsTXT" onClick="HTMLtoTXT()"> Download List (TXT)</button>
+    <button id = "generateSubsetCloud"> Generate Cloud from Selected Papers</button>
     <button id = "backToCloud"> Back to Cloud Page</button>
     <br>
     <button id = "RunIt" onClick="sortTable()"> Run Program</button>
