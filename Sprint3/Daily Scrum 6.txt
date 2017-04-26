@@ -1,0 +1,21 @@
+QUESTIONS
+1) What did I do yesterday that helped the Development Team meet the Sprint Goal?
+2) What will I do today to help the Development Team meet the Sprint Goal?
+3) Do I see any impediment that prevents me or the Development Team from meeting the Sprint Goal?
+
+ANSWERS
+Arman Akhbari
+ 
+
+Brian Bares
+
+
+Shokoufeh Namazian
+ 
+1)I did some REQ black box test.
+2) I work on 2 more REQ black box  tests.
+3) I need to complete black box test and xp practices.
+
+
+Matthew van Niekerk
+ 
