@@ -2,6 +2,12 @@
     $q = $_GET["query"];
     $au = $_GET["au"];
     $n = $_GET["num"];
+    $t = $_GET["search_type"];
+
+    /*
+    I just noticed this isn't consistent between pages. Other pages e.g. word_cloud have num_articles (should be num_pages
+    but whatever) while parameters to this page are all num. WTF is this? This needs to be fixed
+    */
 ?>
 
 <!DOCTYPE html>
@@ -157,6 +163,42 @@ if ("<?= $au ?>" != "") { //if an author search
                     }
                 }
             }
+        }
+    }
+} else if ("<?= $t ?>" == "subset") { //if a subset search
+    console.log("this is a subset search");
+    var counter = 0;
+    var subParams = <?php
+                $subQ = $_GET["qpaper"];
+                echo json_encode($subQ);
+        ?>;
+
+    for (var key in json) { //for each paper
+        if (papersUsed.length < "<?= $n ?>") { //if we haven't hit the paper max defined by user
+            for (k = 0; k < subParams.length; k++) {
+                if (json[key].title.toLowerCase() == subParams[k].toLowerCase()) {
+                    //if we found a matching paper, proceed as normal and count frequencies
+                    var paperContent = json[key].content.split(" ");
+                    for (j = 0; j < paperContent.length; j++) {
+                        if (paperContent[j].toLowerCase() == "<?= $q ?>".toLowerCase()) {
+                            frequencies[counter] = frequencies[counter] ? frequencies[counter] + 1 : 1;
+                        }
+                    }
+                    if (frequencies[counter] > 0) {
+                        papersUsed[counter] = new Paper();
+                        papersUsed[counter].setTitle(json[key].title);
+                        papersUsed[counter].setAuthors(json[key].authors);
+                        papersUsed[counter].setConference(json[key].conference);
+                        papersUsed[counter].setLink(json[key].link);
+                        papersUsed[counter].setBibtex(json[key].bibtex);
+                        papersUsed[counter].setContent(json[key].content);
+                        papersUsed[counter].setAbstract(json[key].abstract);
+                        papersUsed[counter].setKeywords(json[key].keywords);
+                        counter++;
+                    }
+                }
+            }
+            
         }
     }
 }

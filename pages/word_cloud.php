@@ -381,8 +381,14 @@
 							word = d.text;
                             if ("<?= $t ?>" == "Search by author") { //this leaves a space in the author name! Fix later
                                 window.open("paper_list.php?query="+word+"&au=<?= $q ?>&num=<?= $n ?>", "_self", false);
-                            } else {
+                            } else if ("<?= $t ?>" == "Search by keyword") {
                                 window.open("paper_list.php?query="+word+"&num=<?= $n ?>", "_self", false);
+                            } else { //if subset
+                                var paramsToPass = "?search_type=subset&query="+word+"&num=<?= $n ?>";
+                                for (i = 0; i < subParams.length; i++) {
+                                    paramsToPass += "&qpaper[]="+subParams[i];
+                                }
+                                window.open("paper_list.php"+paramsToPass, "_self", false);
                             }
 							//loadPage("paperList");
                             
