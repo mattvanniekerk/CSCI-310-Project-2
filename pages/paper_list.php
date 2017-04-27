@@ -291,6 +291,7 @@ if ("<?= $au ?>" != "") { //if an author search
                         get it to append the nodes in the right spot : ^)
                         */
                     }
+                    //I feel like these should be in order but I'm too lazy to do it. Maybe later. It works as it is
                     if (p == 4) { //change link text to an actual link to find paper in IEEE database
                         tdd = document.createElement('TD');
                         var link = document.createElement("a");
@@ -300,6 +301,16 @@ if ("<?= $au ?>" != "") { //if an author search
                         tdd.appendChild(link);
                         tr.appendChild(tdd);
                     } 
+                    else if (p == 3) { //change conference text to link listing other papers in that conference
+                        tdd = document.createElement('TD');
+                        var link = document.createElement("a");
+                        var param = encodeURIComponent(sortedArray[z][3]);
+                        link.setAttribute("href", "conference_page.php?query="+param, "_self", false);
+                        var linkText = document.createTextNode(sortedArray[z][3]);
+                        link.appendChild(linkText);
+                        tdd.appendChild(link);
+                        tr.appendChild(tdd);
+                    }
                     else if (p == 1) { //change title text to a link that shows abstract with words highlighted
                         tdd = document.createElement('TD');
                         var link = document.createElement("a");
