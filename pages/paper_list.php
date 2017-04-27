@@ -4,6 +4,7 @@
     $n = $_GET["num"];
     $t = $_GET["search_type"];
     $c = $_GET["conference"];
+    $k = $_GET["keyQuery"];
 
     /*
     I just noticed this isn't consistent between pages. Other pages e.g. word_cloud have num_articles (should be num_pages
@@ -203,10 +204,10 @@ if ("<?= $au ?>" != "") { //if an author search
         }
     }
 } else if ("<?= $t ?>" == "conference") { //conference search
-    console.log("this is a conference search");
     console.log("<?= $c ?>");
     var counter = 0;
     for (var key in json) { //for each paper
+        console.log("<?= $n ?>");
         if (papersUsed.length < "<?= $n ?>") { //if we haven't hit the paper max defined by user
             if (json[key].conference.toLowerCase() == ("<?= $c ?>").toLowerCase()) {
                 var paperContent = json[key].content.split(" ");
@@ -230,45 +231,37 @@ if ("<?= $au ?>" != "") { //if an author search
             }
         }
     }
-}
-    else {
-        var counter = 0;
-        for (var key in json) { //for each paper
-            if (papersUsed.length < "<?= $n ?>") { //if we haven't hit the number article max defined by user
-                if (json[key].content.includes("<?= $q ?>")) { //if query string is contained in paper
-                    //count frequency of query
-                    var timesOccurred = (json[key].content.match(/<?= $q ?>/g));
-                    frequencies[counter] = timesOccurred.length;
-                    console.log(timesOccurred);
-                } else {
-                    for (i = 0; i < json[key].keywords.length; i++) {
-                        /*not even sure why I even bother here because if the word isn't in the content,
-                        it's most likely not in the keywords. I literally only keep this here in the very
-                        small off chance that a search term shows up in keywords but not in content.
-                        Anyway, once it finds it in the keywords, break because it won't be listed more than once
-                        */
-                        if (json[key].keywords[i].toLowerCase() == "<?= $q ?>".toLowerCase()) {
-                            frequencies[counter] = 1;
-                            break;
+} else { //keyword search    
+    var counter = 0;
+    for (var key in json) { //for each paper
+        if (papersUsed.length < "<?= $n ?>") { //if we haven't hit the number article max defined by user
+            for (i = 0; i < json[key].keywords.length; i++) {
+                if (json[key].keywords[i].toLowerCase() == "<?= $k ?>".toLowerCase()) {
+                    //if paper's keywords contain the keyword search term
+                    var paperContent = json[key].content.split(" ");
+                    for (j = 0; j < paperContent.length; j++) {
+                        if (paperContent[j].toLowerCase() == "<?= $q ?>".toLowerCase()) {
+                            frequencies[counter] = frequencies[counter] ? frequencies[counter] + 1 : 1;
                         }
                     }
-                }
-                if (frequencies[counter] > 0) {
-                    papersUsed[counter] = new Paper();
-                    papersUsed[counter].setTitle(json[key].title);
-                    papersUsed[counter].setAuthors(json[key].authors);
-                    papersUsed[counter].setConference(json[key].conference);
-                    papersUsed[counter].setLink(json[key].link);
-                    papersUsed[counter].setBibtex(json[key].bibtex);
-                    papersUsed[counter].setContent(json[key].content);
-                    papersUsed[counter].setAbstract(json[key].abstract);
-                    papersUsed[counter].setKeywords(json[key].keywords);
-                    //determineFrequency("", counter);
-                    counter++;
+                    if (frequencies[counter] > 0) {
+                        papersUsed[counter] = new Paper();
+                        papersUsed[counter].setTitle(json[key].title);
+                        papersUsed[counter].setAuthors(json[key].authors);
+                        papersUsed[counter].setConference(json[key].conference);
+                        papersUsed[counter].setLink(json[key].link);
+                        papersUsed[counter].setBibtex(json[key].bibtex);
+                        papersUsed[counter].setContent(json[key].content);
+                        papersUsed[counter].setAbstract(json[key].abstract);
+                        papersUsed[counter].setKeywords(json[key].keywords);
+                        counter++;
+                    }
                 }
             }
         }
+
     }
+}
 
 
     var sortedArray = new Array()
@@ -334,8 +327,8 @@ if ("<?= $au ?>" != "") { //if an author search
                         tdd = document.createElement('TD');
                         var link = document.createElement("a");
                         var param = encodeURIComponent(sortedArray[z][3]);
-                        //link.setAttribute("href", "conference_page.php?query="+param, "_self", false);
-                        link.setAttribute("href", "word_cloud.php?search_type=conference&num_articles=<?= $n ?>&query="+param, "_self", false);
+                        //link.setAttribute("href", "word_cloud.php?search_type=conference&num_articles=<?= $n ?>&query="+param, "_self", false);
+                        link.setAttribute("href", "paper_list.php?search_type=conference&num=<?= $n ?>&conference="+param+"&query=<?= $q ?>");
                         var linkText = document.createTextNode(sortedArray[z][3]);
                         link.appendChild(linkText);
                         tdd.appendChild(link);
@@ -411,11 +404,11 @@ if ("<?= $au ?>" != "") { //if an author search
     <button id = "downloadAsPDF" onClick = "HTMLtoPDF()"> Download List (PDF)</button>
     <button id = "downloadAsTXT" onClick="HTMLtoTXT()"> Download List (TXT)</button>
     <button id = "generateSubsetCloud" onClick= "generateSubsetCloud()"> Generate Cloud from Selected Papers</button>
-    <button id = "backToCloud"> Back to Cloud Page</button>
-    <br>
+    <button id = "backToCloud" onClick = "toCloudPage()" > Back to Cloud Page</button>
+<!--    <br>
     <button id = "RunIt" onClick="sortTable()"> Run Program</button>
     <br>
-    <button id = "fillUpData" onClick = "FillDataUp()"> Fill Up Data </button>
+    <button id = "fillUpData" onClick = "FillDataUp()"> Fill Up Data </button>-->
 
 
 
@@ -457,6 +450,30 @@ function generateSubsetCloud() {
         }
     }
     window.open("word_cloud.php"+paramsToPass, "_self", false);
+}
+    
+function toCloudPage() {
+    if ("<?= $t ?>" == "Search by author") {
+        var paramsToPass = "?query=<?= $au ?>&search_type=Search+by+author&num_articles=<?= $n ?>";
+        window.open("word_cloud.php"+paramsToPass, "_self", false);
+    } else if ("<?= $t ?>" == "Search by keyword") {
+        var paramsToPass = "?query=<?= $q ?>&search_type=Search+by+keyword&num_articles=<?= $n ?>";
+        window.open("word_cloud.php"+paramsToPass, "_self", false);    
+    } else if ("<?= $t ?>" == "conference") {
+        var conf = encodeURIComponent("<?= $c ?>");
+        var paramsToPass = "?query=<?= $q ?>&search_type=conference&num_articles=<?= $n ?>&conference="+conf;
+        window.open("word_cloud.php"+paramsToPass, "_self", false);
+    } else if ("<?= $t ?>" == "subset") {
+        var paramsToPass = "?search_type=subset&num_articles=<?= $n ?>";
+        var subParams = <?php
+            $subQ = $_GET["qpaper"];
+            echo json_encode($subQ);
+        ?>;
+        for (i = 0; i < subParams.length; i++) {
+            paramsToPass += "&query[]=" + subParams[i];
+        }
+        window.open("word_cloud.php"+paramsToPass, "_self", false);
+    }
 }
 
 

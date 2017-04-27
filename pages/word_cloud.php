@@ -10,6 +10,7 @@
 	$q = $_GET["query"];
     $t = $_GET["search_type"];
     $n = $_GET["num_articles"];
+    $c = $_GET["conference"];
 
 
 
@@ -52,12 +53,6 @@
 			    
 				<div id="searchControls">
 					<div id="paperSearchBar"></div>
-					
-					<input type="button" id="search" class="button"  value="Search"  disabled="true" />
-					
-					<input type="button" id="add"  class="button" value="Add" disabled="true" />
-					
-					<input type="button" id="share" class="button" value="Share" disabled="true" />
              
                     <a id="download" download="wordCloud.png"> <button type="button" class="button"> Download Image </button></a>    
 			        
@@ -186,18 +181,8 @@
         if("<?= $t ?>" == "Search by keyword") {
             for (var key in json) {
                 if (allWords.length < "<?= $n ?>") {
-                    if (json[key].content.includes("<?= $q ?>")) {
-                        allWords.push(json[key].content);
-                        continue;
-                    }
-                    /*if keyword appears in content, add to word cloud. This method of adding words to the
-                    word cloud allows users to either search for an arbitrary term or phrase,
-                    or to search for a paper that explicitly defines it as a keyword.
-                    Content "if" check accounts for the arbitrary term scenario, while we
-                    keep the keyword search loop just in case a search term is a keyword
-                    but not explicitly stated in the paper content
-                    */
-                    for (i = 0; i< json[key].keywords.length; i++) {
+                    for (i = 0; i< json[key].keywords.length; i++) { 
+                        //for each keyword, see if it matches the query term then push to wordcloud if it does
                         if (json[key].keywords[i].toLowerCase() == "<?= $q ?>".toLowerCase()) {
                             allWords.push(json[key].content)
                             break; //if keyword matches, add content and move to next paper
@@ -247,25 +232,10 @@
                     }
                 }
             }
-            /*
-            TODO: MODIFY PAPER_LIST SO THAT IT RECEIVES THE WORD_CLOUD QUERIES AND ONLY RETURNS RESULTS
-            WITH THOSE PAPERS
-            */
             
         }
         
-      
-
-            //xhr.open("GET", "http://ieeexplore.ieee.org/gateway/ipsSearch.jsp?querytext=<?= q ?>&hc=<?= n ?>", true);
-        
-        /*xhr.onload = function() {
-            if (xhr.readystate == xhr.DONE) {
-                if (xhr.status == 200 && xhr.readyState == 4) {
-                    console.log(xhr.response);
-                    console.log(xhr.responseXML);
-                }
-            }
-        }*/
+ 
 		///
 		//FUNCTIONS:
 		///		
@@ -394,7 +364,7 @@
                             if ("<?= $t ?>" == "Search by author") { //this leaves a space in the author name! Fix later
                                 window.open("paper_list.php?query="+word+"&au=<?= $q ?>&num=<?= $n ?>", "_self", false);
                             } else if ("<?= $t ?>" == "Search by keyword") {
-                                window.open("paper_list.php?query="+word+"&num=<?= $n ?>", "_self", false);
+                                window.open("paper_list.php?query="+word+"&num=<?= $n ?>&keyQuery=<?= $q ?>", "_self", false);
                             } else if ("<?= $t ?>" == "conference") {
                                 var param = encodeURIComponent("<?= $q ?>");
                                 console.log(param);
@@ -422,38 +392,9 @@
 			  .start();
         }
         generatePaperCloud();
-		//move();
-		
-		// Set up the Artist Search Bar
-		/*$("#paperSearchBar")
-			.load("components/paperSearchBar.html")
-			.on("yesSelection", function() {		
-				$("#search").removeProp("disabled");
-				$("#add").removeProp("disabled");
-			})
-			.on("noSelection", function() {
-				$("#search").attr("disabled", true);
-				$("#add").attr("disabled", true);
-			});*/
 
-		// Set up the Search Button
-		$('#search').click(function() {
 
-			
-			$("#paperSearchBar").trigger('clear');
-			
-			var artistID = $("#paperSearchBar").attr("value");
-			searchArtists([allArtists[artistID]]);
-		});
 		
-		// Set up the Add Button
-		$('#add').click(function() {
-			
-			$("#paperSearchBar").trigger('clear');
-			
-			var artistID = $("#paperSearchBar").attr("value");
-			addArtist(allArtists[artistID]);
-		});
         
         $("#download").click(function() {
             var dl = document.getElementById("download");
