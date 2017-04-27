@@ -412,10 +412,7 @@ if ("<?= $au ?>" != "") { //if an author search
     <button id = "downloadAsTXT" onClick="HTMLtoTXT()"> Download List (TXT)</button>
     <button id = "generateSubsetCloud" onClick= "generateSubsetCloud()"> Generate Cloud from Selected Papers</button>
     <button id = "backToCloud"> Back to Cloud Page</button>
-    <br>
-    <button id = "RunIt" onClick="sortTable()"> Run Program</button>
-    <br>
-    <button id = "fillUpData" onClick = "FillDataUp()"> Fill Up Data </button>
+    
 
 
 
@@ -490,12 +487,8 @@ function HTMLtoTXT(){
 
 
 
-function  RunProgram(){
-    document.getElementById('myHeader').innerHTML = "HELLO";
-}
-function FillDataUp(){
-   
-}
+
+
 
 </script>
 
