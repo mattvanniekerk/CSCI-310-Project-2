@@ -43,6 +43,7 @@
 			    
 			    <h1 id="wordCloudTitle">Word Cloud Page for <?= $q ?></h1>
 			    <h4 id="subsetTitles"></h4>
+			    <h4 id="conferenceHeader"></h4>
 				<div id="wordCloud">
 					<div id="wordCloudLoading" style="display:none"><img src="components/loading.gif" width=100 height=100></div>
 					<svg id="wordCloudSVG"></svg>
@@ -201,6 +202,17 @@
                             allWords.push(json[key].content)
                             break; //if keyword matches, add content and move to next paper
                         }
+                    }
+                }
+            }
+        }
+        if("<?= $t ?>" == "conference") {
+            document.getElementById("wordCloudTitle").innerHTML = "Word Cloud for conference: ";
+            document.getElementById("conferenceHeader").innerHTML = "<?= $q ?>";
+            for (var key in json) {
+                if (allWords.length < "<?= $n ?>") {
+                    if (json[key].conference.toLowerCase() == ("<?= $q ?>").toLowerCase()) {
+                        allWords.push(json[key].content);
                     }
                 }
             }
@@ -383,6 +395,11 @@
                                 window.open("paper_list.php?query="+word+"&au=<?= $q ?>&num=<?= $n ?>", "_self", false);
                             } else if ("<?= $t ?>" == "Search by keyword") {
                                 window.open("paper_list.php?query="+word+"&num=<?= $n ?>", "_self", false);
+                            } else if ("<?= $t ?>" == "conference") {
+                                var param = encodeURIComponent("<?= $q ?>");
+                                console.log(param);
+                                var paramsToPass = "?search_type=conference&query="+word+"&num=<?= $n ?>&conference="+param;
+                                window.open("paper_list.php"+paramsToPass, "_self", false);
                             } else { //if subset
                                 var paramsToPass = "?search_type=subset&query="+word+"&num=<?= $n ?>";
                                 for (i = 0; i < subParams.length; i++) {

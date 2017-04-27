@@ -3,6 +3,7 @@
     $au = $_GET["au"];
     $n = $_GET["num"];
     $t = $_GET["search_type"];
+    $c = $_GET["conference"];
 
     /*
     I just noticed this isn't consistent between pages. Other pages e.g. word_cloud have num_articles (should be num_pages
@@ -201,6 +202,34 @@ if ("<?= $au ?>" != "") { //if an author search
             
         }
     }
+} else if ("<?= $t ?>" == "conference") { //conference search
+    console.log("this is a conference search");
+    console.log("<?= $c ?>");
+    var counter = 0;
+    for (var key in json) { //for each paper
+        if (papersUsed.length < "<?= $n ?>") { //if we haven't hit the paper max defined by user
+            if (json[key].conference.toLowerCase() == ("<?= $c ?>").toLowerCase()) {
+                var paperContent = json[key].content.split(" ");
+                for (j = 0; j < paperContent.length; j++) {
+                    if (paperContent[j].toLowerCase() == "<?= $q ?>".toLowerCase()) {
+                        frequencies[counter] = frequencies[counter] ? frequencies[counter] + 1 : 1;
+                    }
+                }
+                if (frequencies[counter] > 0) {
+                    papersUsed[counter] = new Paper();
+                    papersUsed[counter].setTitle(json[key].title);
+                    papersUsed[counter].setAuthors(json[key].authors);
+                    papersUsed[counter].setConference(json[key].conference);
+                    papersUsed[counter].setLink(json[key].link);
+                    papersUsed[counter].setBibtex(json[key].bibtex);
+                    papersUsed[counter].setContent(json[key].content);
+                    papersUsed[counter].setAbstract(json[key].abstract);
+                    papersUsed[counter].setKeywords(json[key].keywords);
+                    counter++;
+                }
+            }
+        }
+    }
 }
     else {
         var counter = 0;
@@ -305,7 +334,8 @@ if ("<?= $au ?>" != "") { //if an author search
                         tdd = document.createElement('TD');
                         var link = document.createElement("a");
                         var param = encodeURIComponent(sortedArray[z][3]);
-                        link.setAttribute("href", "conference_page.php?query="+param, "_self", false);
+                        //link.setAttribute("href", "conference_page.php?query="+param, "_self", false);
+                        link.setAttribute("href", "word_cloud.php?search_type=conference&num_articles=<?= $n ?>&query="+param, "_self", false);
                         var linkText = document.createTextNode(sortedArray[z][3]);
                         link.appendChild(linkText);
                         tdd.appendChild(link);
@@ -314,7 +344,7 @@ if ("<?= $au ?>" != "") { //if an author search
                     else if (p == 1) { //change title text to a link that shows abstract with words highlighted
                         tdd = document.createElement('TD');
                         var link = document.createElement("a");
-                        link.setAttribute("href", "abstract_page.php?query="+sortedArray[z][1], "_self", false);
+                        link.setAttribute("href", "abstract_page.php?word=<?= $q ?>&query="+sortedArray[z][1], "_self", false);
                         var linkText = document.createTextNode(sortedArray[z][1]);
                         link.appendChild(linkText);
                         tdd.appendChild(link);

@@ -10,6 +10,7 @@
 	$q = $_GET["query"];
     $t = $_GET["search_type"];
     $n = $_GET["num_articles"];
+    $w = $_GET["word"];
 
 
 
@@ -55,7 +56,9 @@
 	</body>
 
 	<style>
-
+        .highlight {
+            background-color: yellow;
+        }
 	
 	</style>
 
@@ -80,6 +83,12 @@
                 break;
             }
         }
+        word = "<?= $w ?>";
+        var highlightedAbstract = (document.getElementById("abstractText").innerHTML).replace(regexForWord(word), function(match) {	
+		return "<span class='highlight'>" + match + "</span>";
+	});
+	$("#abstractText").html(highlightedAbstract);
+        
 
 
 			
