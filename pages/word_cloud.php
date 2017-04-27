@@ -193,10 +193,10 @@
         }
         if("<?= $t ?>" == "conference") {
             document.getElementById("wordCloudTitle").innerHTML = "Word Cloud for conference: ";
-            document.getElementById("conferenceHeader").innerHTML = "<?= $q ?>";
+            document.getElementById("conferenceHeader").innerHTML = "<?= $c ?>";
             for (var key in json) {
                 if (allWords.length < "<?= $n ?>") {
-                    if (json[key].conference.toLowerCase() == ("<?= $q ?>").toLowerCase()) {
+                    if (json[key].conference.toLowerCase() == ("<?= $c ?>").toLowerCase()) {
                         allWords.push(json[key].content);
                     }
                 }
@@ -247,6 +247,9 @@
 			if (word.length < 3) {
 				return false;
 			}
+            if (!(/^[0-9a-zA-Z]+$/.test(word))) {
+                return false;
+            }
 			
 			//exclude commonly used words
 			
@@ -366,7 +369,7 @@
                             } else if ("<?= $t ?>" == "Search by keyword") {
                                 window.open("paper_list.php?query="+word+"&num=<?= $n ?>&keyQuery=<?= $q ?>", "_self", false);
                             } else if ("<?= $t ?>" == "conference") {
-                                var param = encodeURIComponent("<?= $q ?>");
+                                var param = encodeURIComponent("<?= $c ?>");
                                 console.log(param);
                                 var paramsToPass = "?search_type=conference&query="+word+"&num=<?= $n ?>&conference="+param;
                                 window.open("paper_list.php"+paramsToPass, "_self", false);
