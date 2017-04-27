@@ -10,6 +10,7 @@
 	$q = $_GET["query"];
     $t = $_GET["search_type"];
     $n = $_GET["num_articles"];
+    $w = $_GET["word"];
 
 
 
@@ -86,8 +87,47 @@
 	</body>
 
 	<style>
+<<<<<<< HEAD
+=======
+        .highlight {
+            background-color: yellow;
+        }
+>>>>>>> e34032e7ee3aeb390f5019b4c38cc866adbc0c2f
 	
 	</style>
 
 
+<<<<<<< HEAD
+=======
+	<script>
+
+        var json = {};
+        $.ajax({ 
+            url: "../cache/papers.json",
+            async: false,
+            dataType: "json",
+            success:function(data) {
+                json = data;
+                console.log(data);
+            }
+        });
+        
+
+        for (var key in json) {
+            if (json[key].title.toLowerCase() == "<?= $q ?>".toLowerCase()) {
+                document.getElementById("abstractText").innerHTML = json[key].abstract;
+                break;
+            }
+        }
+        word = "<?= $w ?>";
+        var highlightedAbstract = (document.getElementById("abstractText").innerHTML).replace(regexForWord(word), function(match) {	
+		return "<span class='highlight'>" + match + "</span>";
+	});
+	$("#abstractText").html(highlightedAbstract);
+        
+
+
+			
+	</script>
+>>>>>>> e34032e7ee3aeb390f5019b4c38cc866adbc0c2f
 </html>
