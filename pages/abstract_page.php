@@ -87,18 +87,13 @@
 	</body>
 
 	<style>
-<<<<<<< HEAD
-=======
         .highlight {
             background-color: yellow;
         }
->>>>>>> e34032e7ee3aeb390f5019b4c38cc866adbc0c2f
+
 	
 	</style>
 
-
-<<<<<<< HEAD
-=======
 	<script>
 
         var json = {};
@@ -129,5 +124,5 @@
 
 			
 	</script>
->>>>>>> e34032e7ee3aeb390f5019b4c38cc866adbc0c2f
+
 </html>
