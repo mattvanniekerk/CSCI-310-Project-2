@@ -42,7 +42,7 @@
         <th id = "paperAuthor" style="padding:0 15px 0 15px;"> Author</th>
         <th id = "paperConference" style="padding:0 15px 0 15px;"> Conference</th>
         <th id = "paperDownloadLink" style="padding:0 15px 0 15px;"> Download Link</th>
-        <th id = "paperBibtex" style="padding:0 15px 0 15px;"> Bibtext</th>
+        <th id = "paperBibtex" style="padding:0 15px 0 15px;"> Bibtex</th>
 
 
     </tr>
@@ -252,7 +252,7 @@ if ("<?= $au ?>" != "") { //if an author search
             td.push(papersUsed[i].getAuthors());
             td.push(papersUsed[i].getConference());
             td.push(papersUsed[i].getLink());
-            td.push(papersUsed[i].getBibtex());
+            td.push("Bibtex");
             arrayOfArrays.push(td);
             td = [];
             }
@@ -345,6 +345,14 @@ if ("<?= $au ?>" != "") { //if an author search
 
                         cellToAdd.appendChild(cellTable);
                         tr.appendChild(cellToAdd);
+                    } else if (p == 5) {
+                        tdd = document.createElement('TD');
+                        var link = document.createElement("a");
+                        link.setAttribute("href", "bibtex_page.php?query="+sortedArray[z][1], "_self", false);
+                        var linkText = document.createTextNode(sortedArray[z][5]);
+                        link.appendChild(linkText);
+                        tdd.appendChild(link);
+                        tr.appendChild(tdd);
                     }
                         else{
                         tdd = document.createElement('TD');
@@ -396,7 +404,7 @@ var pageTitle = "";
 var pageFrequency = "";
 var pageContent = "";
 var pageAuthors = [];
-var pageBibtext = "";
+var pageBibtex = "";
 var pageLink = ""; 
 
 
