@@ -35,53 +35,59 @@
     </head>
     <body>
 
+
  
-			<div id="wordCloudPage">
-			    
-			    <h1 id="wordCloudTitle"> <?= $q ?> </h1>
-			    <h2 id="paperTitle"> Abstract </h2>
-			    
-				<div id="abstractText">
-					<p id="abstractText"> </p>
-			    </div>
-			    
-				<div id="downloadControls">
-                    <a id="download" download="abstract.pdf"> <button type="button" class="button"> Download PDF </button></a>    
-			        
-			    </div>
-			    
-			</div>
+		<div id="wordCloudPage">
+		    
+		    <h1 id="wordCloudTitle"> <?= $q ?> </h1>
+		    <h2 id="paperTitle"> Abstract </h2>
+		    
+			<div id="abstractText">
+				<p id="abstractText"> </p>
+		    </div>
+		    
+			<div id="downloadControls">
+                <a id="download" download="abstract.pdf"> <button type="button" class="button" > Download PDF </button></a>    
+		        
+		    </div>
+		    
+		</div>
+
+        <script>
+
+
+            var json = {};
+            $.ajax({ 
+                url: "../cache/papers.json",
+                async: false,
+                dataType: "json",
+                success:function(data) {
+                    json = data;
+                    console.log(data);
+                }
+            });
+            
+
+            for (var key in json) {
+                if (json[key].title.toLowerCase() == "<?= $q ?>".toLowerCase()) {
+                    document.getElementById("abstractText").innerHTML = json[key].abstract;
+                    document.getElementById("download").onclick = function (){ window.open(json[key].link) };
+                    break;
+                }
+            }
+
+            function openPDFTab() {
+                window.open(json);
+            }
+
+                
+        </script>
 
 	</body>
 
 	<style>
-
 	
 	</style>
 
 
-	<script>
-
-        var json = {};
-        $.ajax({ 
-            url: "../cache/papers.json",
-            async: false,
-            dataType: "json",
-            success:function(data) {
-                json = data;
-                console.log(data);
-            }
-        });
-        
-
-        for (var key in json) {
-            if (json[key].title.toLowerCase() == "<?= $q ?>".toLowerCase()) {
-                document.getElementById("abstractText").innerHTML = json[key].abstract;
-                break;
-            }
-        }
-
-
-			
-	</script>
 </html>
