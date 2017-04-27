@@ -7,7 +7,7 @@
 	
 		require_once('/var/www/html/project/class.paper.php');
 
-		$num_papers = 11;
+		$num_papers = 12;
 
 		$papers = [];
 		$file;
