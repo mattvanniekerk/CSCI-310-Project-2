@@ -13,12 +13,75 @@
   <script src="blanket.min.js"></script>
 
   <script type="text/javascript" src="sort.js" data-cover></script>
+  <script type="text/javascript" src="test/validate_word.js" data-cover></script>
+  <script type="text/javascript" src="test/click_author_list.js" data-cover></script>
+  <script type="text/javascript" src="test/move.js" data-cover></script>
+  <script type="text/javascript" src="test/click_conference_list.js" data-cover></script>
+  <script type="text/javascript" src="test/submit_search.js" data-cover></script>
+  <script type="text/javascript" src="test/download_txt.js" data-cover></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 
   <script>
-  	QUnit.test( "hello test", function( assert ) {
-  		//assert.ok( 1 == "1", "Passed!" );
-  		assert.equal(return_zero(), 0);
-	});
+
+      QUnit.test( "validate word", function(validate) {
+          //checks to see if words are >3 chars, alphanumeric, and not common
+         validate.equal(validateWord("(testword"), false);
+        validate.equal(validateWord("alphanumeric"), "alphanumeric");
+          validate.equal(validateWord("hello!"), false);
+          validate.equal(validateWord("dude/ what's up"), false);
+          validate.equal(validateWord("hi"), false);
+          validate.equal(validateWord("that"), false);
+      });
+      QUnit.test( "click author on list", function( author ) {
+          //correctly reads authors from array to pass into window.open as parameters
+          author.equal(clickAuthor(0, 0, 0), 'Valeriy Oborzhytskyy');
+          author.equal(clickAuthor(0, 0, 1), 'Ivan Prudyus');
+      });
+      QUnit.test( "move progress bar", function( Move ) {
+          Move.equal(move(0), 1);
+          Move.equal(move(1), 0);
+    });
+      QUnit.test( "click conference on list", function( conference) {
+          //encodeURI should replace illegal characters with others i.e. space with %20 so it can be passed as a parameter to a new paper list
+          conference.equal(clickConference(0), "2016%20International%20Conference%20Radio%20Electronics%20%26%20Info%20Communications%20(UkrMiCo)");
+          conference.equal(clickConference(1), "2016%20International%20Conference%20on%203D%20Imaging%20(IC3D)");
+      });
+      QUnit.test( "search by keyword or author", function(submit) {
+          //correctly determines if search is by author or keyword then returns appropriate response
+          submit.equal(submitSearch("Search by author", "Author2", 1), "Author search!");
+          submit.equal(submitSearch("Search by keyword", "Paper2Key2", 1), "Keyword search!");
+      });
+      QUnit.test( "download list as txt", function(dl) {
+          //should return testing url but open up a txt file with one entry in the table
+          dl.equal(HTMLtoTXT(), "file:///var/www/html/project/qunit.html");
+      });
+      QUnit.test( "download list as pdf", function(dl) {
+          //should return testing url but open up a pdf file with one entry in the table
+          dl.equal(HTMLtoPDF(), "file:///var/www/html/project/qunit.html");
+      });
+      QUnit.test( "initial search page", function(search) {
+          //should return url with correct parameters appended
+          search.equal(initialSearch("dual band", key, 5), "localhost/project/pages/word_cloud.php?query=dual+band&search_type=Search+by+keyword&num_articles=5");
+          search.equal(initialSearch("Evgeniy Nelin", au, 3), "localhost/project/pages/word_cloud.php?query=Evgeniy+Nelin&search_type=Search+by+author&num_articles=3");
+      });
+      QUnit.test( "download cloud as img", function(dl) {
+          dl.equal(dlCloud(), "file:///var/www/html/project/qunit.html");
+      });
+      QUnit.test( "click word in cloud", function(click) {
+          //should return url of paper list with correct parameters appended
+          click.equal(clickWord("energy", keyword, 3), "localhost/project/pages/paper_list.php?query=energy&search_type=Search+by+keyword&keyQuery=dual+band&num=3");
+          click.equal(clickWord("parameters", author, "Grebennikov Andrei", 7), "localhost/project/pages/paper_list.php?query=energy&search_type=Search+by+author&au=Grebennikov+Andrei&num=7")
+      });
+      QUnit.test( "generate subset", function(subset) {
+          //should return url with titles of subset correctly appended with query[] to word_cloud.php
+          subset.equal(generateSubset("The Design of Microwave Planar Power Dividers and Couplers with Distinct Power Division Ratio in Two Different Frequency Bands", "High-Frequency Class-E Power Amplifier with Shunt Filter"), "localhost/project/pages/word_cloud.php?search_type=subset&query[]=The%20Design%20of%20Microwave%20Planar%20Power%20Dividers%20and%20Couplers%20with%20Distinct%20Power%20Division%20Ratio%20in%20Two%20Different%20Frequency%20Bands&query[]=High-Frequency%20Class-E%20Power%20Aimplifier%20with%20Shunt%20Filter");
+      })
+      QUnit.test( "hyperlink to download and bibtex", function(link) {
+          //should return appropriate url to download paper or view its bibtex (on its own page)
+          link.equal(downloadPaper("Microwave Filter Based on Crystal-like Reactive Elements"), "http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7739595");
+          link.equal(viewBibtex("The Research of L-type Matching Filter Parameters"), "http://localhost/project/pages/bibtex_page.php?query=The%20Research%20of%20L-type%20Matching%20Filter%20Parameters");
+      })
+      
   </script>
 </body>
 </html>
