@@ -5,6 +5,7 @@
     $t = $_GET["search_type"];
     $c = $_GET["conference"];
     $k = $_GET["keyQuery"];
+    $s = $_GET["sort"];
 
     /*
     I just noticed this isn't consistent between pages. Other pages e.g. word_cloud have num_articles (should be num_pages
@@ -167,6 +168,19 @@ if ("<?= $au ?>" != "") { //if an author search
             }
         }
     }
+    var sortTitleLink = "Title";
+    document.getElementById("paperTitle").innerHTML = sortTitleLink.link("http://localhost/project/pages/paper_list.php?query=<?= $q ?>&au=<?= $au ?>&num=<?= $n ?>&sort=title");
+    
+    var sortFrequencyLink = "Frequency";
+    document.getElementById("paperFrequency").innerHTML = sortFrequencyLink.link("http://localhost/project/pages/paper_list.php?query=<?= $q ?>&au=<?= $au ?>&num=<?= $n ?>&sort=frequency");
+    
+    /*var sortAuthorLink = "Author";
+    document.getElementById("paperAuthor").innerHTML = sortAuthorLink.link("http://localhost/project/pages/paper_list.php?query=<?= $q ?>&au=<?= $au ?>&num=<?= $n ?>&sort=author");*/
+    
+    var sortConferenceLink = "Conference";
+    document.getElementById("paperConference").innerHTML = sortConferenceLink.link("http://localhost/project/pages/paper_list.php?query=<?= $q ?>&au=<?= $au ?>&num=<?= $n ?>&sort=conference");
+
+    
 } else if ("<?= $t ?>" == "subset") { //if a subset search
     console.log("this is a subset search");
     var counter = 0;
@@ -203,6 +217,19 @@ if ("<?= $au ?>" != "") { //if an author search
             
         }
     }
+    var sortTitleLink = "Title";
+    var subsetParams = "http://localhost/project/pages/paper_list.php?search_type=<?= $t ?>&num=<?= $n ?>&query=<?= $q ?>";
+    for (i = 0; i < subParams.length; i++) {
+        subsetParams += "&qpaper[]="+subParams[i];
+    }
+    document.getElementById("paperTitle").innerHTML = sortTitleLink.link(subsetParams+"&sort=title");
+
+    
+    var sortFrequencyLink = "Frequency";
+    document.getElementById("paperFrequency").innerHTML = sortFrequencyLink.link(subsetParams+"&sort=frequency");
+    
+    var sortConferenceLink = "Conference";
+    document.getElementById("paperConference").innerHTML = sortConferenceLink.link(subsetParams+"&sort=conference");
 } else if ("<?= $t ?>" == "conference") { //conference search
     console.log("<?= $c ?>");
     var counter = 0;
@@ -231,6 +258,16 @@ if ("<?= $au ?>" != "") { //if an author search
             }
         }
     }
+    var sortTitleLink = "Title";
+    var sortConferenceParam = encodeURIComponent("<?= $c ?>");
+    var subsetParams = "http://localhost/project/pages/paper_list.php?search_type=<?= $t ?>&num=<?= $n ?>&query=<?= $q ?>&conference=";
+    document.getElementById("paperTitle").innerHTML = sortTitleLink.link(subsetParams + sortConferenceParam + "&sort=title");
+    
+    var sortFrequencyLink = "Frequency";
+    document.getElementById("paperFrequency").innerHTML = sortFrequencyLink.link(subsetParams + sortConferenceParam + "&sort=frequency");
+    
+    var sortConferenceLink = "Conference";
+    document.getElementById("paperConference").innerHTML = sortConferenceLink.link(subsetParams + sortConferenceParam + "&sort=conference");
 } else { //keyword search    
     var counter = 0;
     for (var key in json) { //for each paper
@@ -261,6 +298,14 @@ if ("<?= $au ?>" != "") { //if an author search
         }
 
     }
+    var sortTitleLink = "Title";
+    document.getElementById("paperTitle").innerHTML = sortTitleLink.link("http://localhost/project/pages/paper_list.php?query=<?= $q ?>&num=<?= $n ?>&keyQuery=<?= $k ?>&sort=title");
+    
+    var sortFrequencyLink = "Frequency";
+    document.getElementById("paperFrequency").innerHTML = sortFrequencyLink.link("http://localhost/project/pages/paper_list.php?query=<?= $q ?>&num=<?= $n ?>&keyQuery=<?= $k ?>&sort=frequency");
+
+    var sortConferenceLink = "Conference";
+    document.getElementById("paperConference").innerHTML = sortConferenceLink.link("http://localhost/project/pages/paper_list.php?query=<?= $q ?>&num=<?= $n ?>&keyQuery=<?= $k ?>&sort=conference");
 }
 
 
@@ -280,17 +325,41 @@ if ("<?= $au ?>" != "") { //if an author search
             }
             var max  = 0;
             counter = 0;
-    while(arrayOfArrays.length > 0){//while we have elements in the US array
-        max = 0;
-        for(j = 0; j<arrayOfArrays.length; j++){//find the element with the greatest frequency
-            if(arrayOfArrays[j][0] > arrayOfArrays[max][0]){
-                max = j;
+    if ("<?= $s ?>" == "title") {
+        while(arrayOfArrays.length > 0) { //while still unsorted elements
+            var currentIndex = 0;
+            for (i = 0; i < arrayOfArrays.length; i++) { //find "smallest" title, e.g. first alphabetically
+                if(arrayOfArrays[i][1] < arrayOfArrays[currentIndex][1]) { //if title comes before currentIndex's title
+                    currentIndex = i;
+                }
             }
+            sortedArray.push(arrayOfArrays[currentIndex]);
+            arrayOfArrays.splice(currentIndex, 1);
         }
-        sortedArray.push(arrayOfArrays[max]);
-        arrayOfArrays.splice(max,1);
-        counter++;
+    } else if ("<?= $q ?>" == "conference") {
+        while (arrayOfArrays.length > 0) {
+            var currentIndex = 0;
+            for (i = 0; i < arrayOfArrays.length; i++) {
+                if(arrayOfArrays[i][3] < arrayOfArrays[currentIndex][3]) {
+                    currentIndex = i;
+                }
+            }
+            sortedArray.push(arrayOfArrays[currentIndex]);
+            arrayofArrays.splice(currentIndex, 1);
+        }
+    } else { //frequency sort
+        while(arrayOfArrays.length > 0){//while we have elements in the US array
+            max = 0;
+            for(j = 0; j<arrayOfArrays.length; j++){//find the element with the greatest frequency
+                if(arrayOfArrays[j][0] > arrayOfArrays[max][0]){
+                    max = j;
+                }
+            }
+            sortedArray.push(arrayOfArrays[max]);
+            arrayOfArrays.splice(max,1);
+            counter++;
 
+        }
     }
          
 
